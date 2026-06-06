@@ -1,0 +1,3880 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Every Drop Counts — NSS CIT Bangalore</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --gb: rgba(255, 255, 255, 0.07);
+        --gbd: rgba(255, 255, 255, 0.13);
+        --blur: blur(18px);
+        --b1: #e8f6ff;
+        --b2: #b3e3ff;
+        --b3: #66c8ff;
+        --b4: #1a9de0;
+        --b5: #0070b8;
+        --bg: #00121f;
+        --teal: #3dd6a3;
+        --warn: #ffd166;
+        --coral: #ff7060;
+        --r: 18px;
+        --rl: 26px;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--b1);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+      .bg-wrap {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .bg-noise {
+        position: absolute;
+        inset: 0;
+        opacity: 0.025;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 200px;
+      }
+      .bg-grad {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 10% 0%,
+            #003d7a38,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 70% at 90% 100%,
+            #002a4d40,
+            transparent 60%
+          ),
+          linear-gradient(180deg, #00121f 0%, #000a14 100%);
+      }
+      .bg-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+        opacity: 0.13;
+      }
+      .bg-orb-1 {
+        width: 480px;
+        height: 480px;
+        background: #1a9de0;
+        top: -160px;
+        left: -80px;
+      }
+      .bg-orb-2 {
+        width: 380px;
+        height: 380px;
+        background: #004d80;
+        bottom: 5%;
+        right: -60px;
+      }
+      .bg-orb-3 {
+        width: 260px;
+        height: 260px;
+        background: #00a86b;
+        top: 45%;
+        left: 55%;
+        opacity: 0.07;
+      }
+      .bg-wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0.08;
+      }
+      .spbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        z-index: 200;
+        pointer-events: none;
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .spfill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--b5), var(--b3), var(--teal));
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+      nav {
+        position: fixed;
+        top: 3px;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2.5rem;
+        background: rgba(0, 18, 31, 0.8);
+        backdrop-filter: var(--blur);
+        border-bottom: 1px solid var(--gbd);
+      }
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        text-decoration: none;
+      }
+      .nav-dot {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--b4), var(--b5));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+      }
+      .nav-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      .nav-name span {
+        color: var(--b3);
+      }
+      .nav-links {
+        display: flex;
+        gap: 0.15rem;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--b2);
+        text-decoration: none;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.38rem 0.75rem;
+        border-radius: 8px;
+        transition:
+          background 0.18s,
+          color 0.18s;
+      }
+      .nav-links a:hover {
+        background: var(--gb);
+        color: #fff;
+      }
+      .nav-cta {
+        background: linear-gradient(135deg, var(--b4), var(--b5)) !important;
+        color: #fff !important;
+        border-radius: 100px !important;
+        padding: 0.38rem 1rem !important;
+      }
+      .nav-menu {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--b2);
+        font-size: 1.4rem;
+        padding: 0.3rem;
+      }
+      .wrap {
+        position: relative;
+        z-index: 1;
+      }
+      section {
+        padding: 7rem 2rem;
+      }
+      .inner {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .tag {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--b3);
+        margin-bottom: 0.65rem;
+      }
+      .h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.1;
+        margin-bottom: 0.85rem;
+      }
+      .sub {
+        font-size: 0.975rem;
+        color: var(--b2);
+        max-width: 540px;
+        line-height: 1.8;
+        margin-bottom: 2.8rem;
+      }
+      .divider {
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gbd),
+          transparent
+        );
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .gc {
+        background: var(--gb);
+        border: 1px solid var(--gbd);
+        backdrop-filter: var(--blur);
+        border-radius: var(--r);
+      }
+      .gc-hover {
+        transition:
+          transform 0.22s,
+          background 0.22s,
+          border-color 0.22s,
+          box-shadow 0.22s;
+      }
+      .gc-hover:hover {
+        transform: translateY(-4px);
+        background: rgba(255, 255, 255, 0.11);
+        border-color: rgba(255, 255, 255, 0.24);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      .d1 {
+        transition-delay: 0.05s;
+      }
+      .d2 {
+        transition-delay: 0.12s;
+      }
+      .d3 {
+        transition-delay: 0.19s;
+      }
+      .d4 {
+        transition-delay: 0.26s;
+      }
+      .d5 {
+        transition-delay: 0.33s;
+      }
+      .d6 {
+        transition-delay: 0.4s;
+      }
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 7rem 2rem 5rem;
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        background: var(--gb);
+        border: 1px solid var(--gbd);
+        backdrop-filter: var(--blur);
+        padding: 0.32rem 1rem;
+        border-radius: 100px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--b3);
+        margin-bottom: 1.8rem;
+        animation: fadeUp 0.8s ease both;
+      }
+      .hero-badge::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--teal);
+        animation: blink 2s infinite;
+        flex-shrink: 0;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(3rem, 8.5vw, 6.8rem);
+        font-weight: 900;
+        line-height: 1.02;
+        color: #fff;
+        margin-bottom: 1.4rem;
+        animation: fadeUp 0.85s 0.08s ease both;
+      }
+      .hero h1 em {
+        font-style: normal;
+        background: linear-gradient(125deg, var(--b3) 20%, var(--b4));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-sub {
+        font-size: 1.05rem;
+        font-weight: 300;
+        color: var(--b2);
+        max-width: 580px;
+        line-height: 1.82;
+        margin-bottom: 2.6rem;
+        animation: fadeUp 0.85s 0.16s ease both;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 0.85rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        animation: fadeUp 0.85s 0.24s ease both;
+        margin-bottom: 4.5rem;
+      }
+      .btn-p {
+        background: linear-gradient(135deg, var(--b4), var(--b5));
+        color: #fff;
+        text-decoration: none;
+        padding: 0.85rem 2rem;
+        border-radius: 100px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        box-shadow: 0 4px 24px #1a9de040;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .btn-p:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px #1a9de060;
+      }
+      .btn-o {
+        border: 1px solid var(--gbd);
+        color: var(--b1);
+        text-decoration: none;
+        padding: 0.85rem 2rem;
+        border-radius: 100px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        background: var(--gb);
+        backdrop-filter: var(--blur);
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .btn-o:hover {
+        background: rgba(255, 255, 255, 0.13);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      .hero-kpi {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.9rem;
+        max-width: 680px;
+        width: 100%;
+        animation: fadeUp 0.85s 0.32s ease both;
+      }
+      .kpi {
+        background: var(--gb);
+        border: 1px solid var(--gbd);
+        backdrop-filter: var(--blur);
+        border-radius: 16px;
+        padding: 1.2rem 1.1rem;
+      }
+      .kpi-n {
+        font-family: "Playfair Display", serif;
+        font-size: 1.75rem;
+        font-weight: 900;
+        color: var(--b3);
+        display: block;
+        line-height: 1.1;
+      }
+      .kpi-l {
+        font-size: 0.7rem;
+        color: var(--b2);
+        margin-top: 0.3rem;
+        line-height: 1.55;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(26px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      /* CRISIS */
+      .crisis-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.9rem;
+      }
+      .scard {
+        padding: 1.9rem;
+      }
+      .scard-tag {
+        font-size: 0.63rem;
+        text-transform: uppercase;
+        letter-spacing: 0.13em;
+        color: var(--b3);
+        margin-bottom: 0.45rem;
+        font-weight: 600;
+      }
+      .scard-num {
+        font-family: "Playfair Display", serif;
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: var(--b3);
+        line-height: 1;
+      }
+      .scard-unit {
+        font-size: 0.95rem;
+        font-weight: 400;
+      }
+      .scard-desc {
+        font-size: 0.855rem;
+        color: var(--b2);
+        margin-top: 0.45rem;
+        line-height: 1.68;
+      }
+      .scard-src {
+        font-size: 0.62rem;
+        color: rgba(255, 255, 255, 0.25);
+        font-style: italic;
+        margin-top: 0.55rem;
+        display: block;
+      }
+      .scard-icon {
+        font-size: 1.65rem;
+        margin-bottom: 0.7rem;
+        display: block;
+      }
+      .wide {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+      .bar-wrap {
+        background: var(--gb);
+        border: 1px solid var(--gbd);
+        border-radius: var(--r);
+        padding: 1.8rem;
+        margin-top: 0.9rem;
+      }
+      .bar-row {
+        margin-bottom: 1rem;
+      }
+      .bar-lbl {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.76rem;
+        color: var(--b2);
+        margin-bottom: 0.32rem;
+      }
+      .bar-track {
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 100px;
+        height: 8px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 100px;
+        background: linear-gradient(90deg, var(--b5), var(--b3));
+      }
+      .bar-note {
+        font-size: 0.62rem;
+        color: rgba(255, 255, 255, 0.25);
+        margin-top: 0.6rem;
+      }
+      /* TIMELINE */
+      .tl-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+      .timeline {
+        position: relative;
+        padding-left: 2.4rem;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          180deg,
+          var(--b4),
+          rgba(26, 157, 224, 0.08)
+        );
+      }
+      .tl-item {
+        position: relative;
+        margin-bottom: 1.6rem;
+        padding: 1.5rem 1.6rem;
+      }
+      .tl-dot {
+        position: absolute;
+        left: -3rem;
+        top: 1.7rem;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 2px solid var(--b4);
+        background: var(--bg);
+        transition: background 0.25s;
+      }
+      .tl-item:hover .tl-dot {
+        background: var(--b4);
+      }
+      .tl-year {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
+        font-weight: 900;
+        color: var(--b3);
+        margin-bottom: 0.25rem;
+      }
+      .tl-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 0.35rem;
+      }
+      .tl-desc {
+        font-size: 0.845rem;
+        color: var(--b2);
+        line-height: 1.68;
+      }
+      .tl-badge {
+        display: inline-block;
+        margin-top: 0.55rem;
+        font-size: 0.65rem;
+        padding: 0.18rem 0.65rem;
+        border-radius: 100px;
+        font-weight: 600;
+      }
+      .bad {
+        background: rgba(255, 160, 60, 0.14);
+        color: #ffb86c;
+        border: 1px solid rgba(255, 160, 60, 0.25);
+      }
+      .worse {
+        background: rgba(255, 100, 80, 0.16);
+        color: #ff8070;
+        border: 1px solid rgba(255, 100, 80, 0.28);
+      }
+      .critical {
+        background: rgba(210, 45, 45, 0.18);
+        color: #ff5555;
+        border: 1px solid rgba(210, 45, 45, 0.3);
+      }
+      .tl-cta {
+        background: linear-gradient(
+          135deg,
+          rgba(26, 157, 224, 0.12),
+          rgba(0, 112, 184, 0.08)
+        );
+        border: 1px solid rgba(26, 157, 224, 0.28);
+        border-radius: var(--r);
+        padding: 1.8rem;
+        margin-top: 0.9rem;
+        text-align: center;
+      }
+      /* MYTHS */
+      .myth-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.9rem;
+      }
+      .myth-card {
+        padding: 1.75rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .myth-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--coral), #ff9930);
+        opacity: 0;
+        transition: opacity 0.28s;
+      }
+      .myth-card:hover::after {
+        opacity: 1;
+      }
+      .myth-label {
+        font-size: 0.63rem;
+        text-transform: uppercase;
+        letter-spacing: 0.13em;
+        color: var(--coral);
+        margin-bottom: 0.38rem;
+        font-weight: 600;
+      }
+      .myth-q {
+        font-family: "Playfair Display", serif;
+        font-size: 0.975rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.75rem;
+        font-style: italic;
+        line-height: 1.4;
+      }
+      .myth-a-label {
+        font-size: 0.63rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--teal);
+        margin-bottom: 0.28rem;
+        font-weight: 600;
+      }
+      .myth-a {
+        font-size: 0.845rem;
+        color: var(--b2);
+        line-height: 1.68;
+      }
+      /* LAKES */
+      .map-layout {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 1.4rem;
+        align-items: start;
+      }
+      .map-svg-wrap {
+        background: var(--gb);
+        border: 1px solid var(--gbd);
+        border-radius: var(--rl);
+        padding: 1.4rem;
+        overflow: hidden;
+      }
+      .map-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.9rem;
+      }
+      .leg-item {
+        display: flex;
+        align-items: center;
+        gap: 0.38rem;
+        font-size: 0.68rem;
+        color: var(--b2);
+      }
+      .leg-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .lake-dot {
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .lake-dot:hover {
+        filter: brightness(1.4) drop-shadow(0 0 6px currentColor);
+      }
+      .map-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        max-height: 520px;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+      .map-sidebar::-webkit-scrollbar {
+        width: 3px;
+      }
+      .map-sidebar::-webkit-scrollbar-thumb {
+        background: var(--gbd);
+        border-radius: 2px;
+      }
+      .lake-mini {
+        padding: 1.1rem;
+        cursor: pointer;
+        transition:
+          transform 0.18s,
+          background 0.18s;
+        border-left: 3px solid transparent;
+      }
+      .lake-mini:hover {
+        transform: translateX(3px);
+      }
+      .lake-mini.healthy {
+        border-left-color: var(--teal);
+      }
+      .lake-mini.degraded {
+        border-left-color: var(--warn);
+      }
+      .lake-mini.critical {
+        border-left-color: var(--coral);
+      }
+      .lc-name {
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: #fff;
+        margin-bottom: 0.15rem;
+      }
+      .lc-status {
+        font-size: 0.67rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .s-healthy {
+        color: var(--teal);
+      }
+      .s-degraded {
+        color: var(--warn);
+      }
+      .s-critical {
+        color: var(--coral);
+      }
+      .lc-desc {
+        font-size: 0.76rem;
+        color: var(--b2);
+        margin-top: 0.28rem;
+        line-height: 1.55;
+      }
+      /* STORIES */
+      .stories-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.9rem;
+      }
+      .story-card {
+        padding: 1.75rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .story-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(61, 214, 163, 0.05),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.28s;
+      }
+      .story-card:hover::before {
+        opacity: 1;
+      }
+      .story-icon {
+        font-size: 1.9rem;
+        margin-bottom: 0.75rem;
+        display: block;
+      }
+      .story-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.02rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.45rem;
+      }
+      .story-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.28rem;
+        font-size: 0.63rem;
+        background: rgba(61, 214, 163, 0.14);
+        color: var(--teal);
+        border: 1px solid rgba(61, 214, 163, 0.24);
+        padding: 0.18rem 0.58rem;
+        border-radius: 100px;
+        font-weight: 600;
+        margin-bottom: 0.55rem;
+      }
+      .story-desc {
+        font-size: 0.82rem;
+        color: var(--b2);
+        line-height: 1.68;
+      }
+      .story-fact {
+        font-size: 0.76rem;
+        color: var(--b3);
+        margin-top: 0.65rem;
+        font-style: italic;
+      }
+      /* CALCULATOR */
+      .calc-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.8rem;
+        align-items: start;
+      }
+      .calc-form {
+        background: var(--gb);
+        border: 1px solid var(--gbd);
+        border-radius: var(--rl);
+        padding: 1.9rem;
+      }
+      .calc-field {
+        margin-bottom: 1.3rem;
+      }
+      .calc-label {
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: var(--b2);
+        margin-bottom: 0.48rem;
+        display: flex;
+        justify-content: space-between;
+      }
+      .calc-val {
+        color: var(--b3);
+        font-size: 0.82rem;
+      }
+      .calc-slider {
+        width: 100%;
+        -webkit-appearance: none;
+        height: 5px;
+        border-radius: 100px;
+        background: rgba(255, 255, 255, 0.1);
+        outline: none;
+        cursor: pointer;
+        accent-color: var(--b4);
+      }
+      .calc-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--b4), var(--b5));
+        cursor: pointer;
+      }
+      .calc-result {
+        background: var(--gb);
+        border: 1px solid var(--gbd);
+        border-radius: var(--rl);
+        padding: 1.9rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+      }
+      .res-main {
+        text-align: center;
+        padding: 1.4rem;
+        background: rgba(26, 157, 224, 0.07);
+        border: 1px solid rgba(26, 157, 224, 0.18);
+        border-radius: var(--r);
+      }
+      .res-num {
+        font-family: "Playfair Display", serif;
+        font-size: 3.3rem;
+        font-weight: 900;
+        color: var(--b3);
+        line-height: 1;
+      }
+      .res-unit {
+        font-size: 0.875rem;
+        color: var(--b2);
+        margin-top: 0.28rem;
+      }
+      .res-compare {
+        font-size: 0.775rem;
+        color: var(--b2);
+        margin-top: 0.45rem;
+        line-height: 1.55;
+      }
+      .res-breakdown {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .rb-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.775rem;
+        padding: 0.45rem 0.75rem;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .rb-label {
+        color: var(--b2);
+      }
+      .rb-val {
+        color: var(--b3);
+        font-weight: 600;
+      }
+      .grade-box {
+        text-align: center;
+        padding: 0.9rem;
+        border-radius: var(--r);
+      }
+      .g-A {
+        background: rgba(61, 214, 163, 0.1);
+        border: 1px solid rgba(61, 214, 163, 0.22);
+      }
+      .g-B {
+        background: rgba(255, 209, 102, 0.08);
+        border: 1px solid rgba(255, 209, 102, 0.18);
+      }
+      .g-C {
+        background: rgba(255, 112, 96, 0.09);
+        border: 1px solid rgba(255, 112, 96, 0.2);
+      }
+      .grade-lbl {
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--b2);
+        margin-bottom: 0.18rem;
+      }
+      .grade-val {
+        font-family: "Playfair Display", serif;
+        font-size: 1.55rem;
+        font-weight: 900;
+      }
+      .grade-desc {
+        font-size: 0.73rem;
+        color: var(--b2);
+        margin-top: 0.15rem;
+      }
+      /* TIPS */
+      .tips-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.9rem;
+      }
+      .tip-card {
+        padding: 1.75rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .tip-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--b4), var(--b3));
+        opacity: 0;
+        transition: opacity 0.28s;
+      }
+      .tip-card:hover::before {
+        opacity: 1;
+      }
+      .tip-emoji {
+        font-size: 1.7rem;
+        margin-bottom: 0.8rem;
+        display: block;
+      }
+      .tip-title {
+        font-family: "Playfair Display", serif;
+        font-size: 0.975rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.35rem;
+      }
+      .tip-text {
+        font-size: 0.82rem;
+        color: var(--b2);
+        line-height: 1.68;
+      }
+      .tip-save {
+        display: inline-block;
+        margin-top: 0.65rem;
+        font-size: 0.66rem;
+        background: rgba(26, 157, 224, 0.16);
+        color: var(--b3);
+        padding: 0.18rem 0.6rem;
+        border-radius: 100px;
+        font-weight: 600;
+      }
+      /* INITIATIVES */
+      .init-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .init-item {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 1.3rem;
+        align-items: start;
+        padding: 1.5rem;
+        transition: transform 0.22s;
+      }
+      .init-item:hover {
+        transform: translateX(5px);
+      }
+      .init-num {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 900;
+        color: rgba(102, 200, 255, 0.18);
+        line-height: 1;
+      }
+      .init-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.32rem;
+      }
+      .init-desc {
+        font-size: 0.82rem;
+        color: var(--b2);
+        line-height: 1.68;
+      }
+      .status-pill {
+        display: inline-block;
+        margin-top: 0.45rem;
+        font-size: 0.63rem;
+        padding: 0.18rem 0.58rem;
+        border-radius: 100px;
+        font-weight: 600;
+      }
+      .s-active {
+        background: rgba(26, 157, 224, 0.18);
+        color: var(--b3);
+        border: 1px solid rgba(102, 200, 255, 0.28);
+      }
+      .s-done {
+        background: rgba(61, 214, 163, 0.1);
+        color: var(--teal);
+        border: 1px solid rgba(61, 214, 163, 0.22);
+      }
+      .s-up {
+        background: rgba(255, 209, 102, 0.08);
+        color: var(--warn);
+        border: 1px solid rgba(255, 209, 102, 0.2);
+      }
+      /* CIT */
+      .cit-wrap {
+        background: linear-gradient(
+          135deg,
+          rgba(26, 157, 224, 0.09),
+          rgba(0, 112, 184, 0.05)
+        );
+        border: 1px solid rgba(26, 157, 224, 0.22);
+        border-radius: var(--rl);
+        padding: 2.6rem;
+      }
+      .cit-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .cit-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 0.3rem;
+      }
+      .cit-sub {
+        font-size: 0.875rem;
+        color: var(--b2);
+        line-height: 1.6;
+      }
+      .cit-activities {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+      }
+      .cit-act {
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 12px;
+        padding: 0.95rem;
+      }
+      .cit-act-icon {
+        font-size: 1.15rem;
+        flex-shrink: 0;
+        margin-top: 0.05rem;
+      }
+      .cit-act-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 0.12rem;
+      }
+      .cit-act-desc {
+        font-size: 0.775rem;
+        color: var(--b2);
+        line-height: 1.55;
+      }
+      .cit-stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.8rem;
+        margin-bottom: 1.8rem;
+      }
+      .cit-stat {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1rem;
+        text-align: center;
+      }
+      .cit-stat-n {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: var(--b3);
+        display: block;
+        line-height: 1;
+      }
+      .cit-stat-l {
+        font-size: 0.65rem;
+        color: var(--b2);
+        margin-top: 0.22rem;
+        line-height: 1.45;
+      }
+      /* PLEDGE + TABS */
+      .pledge-box {
+        background: var(--gb);
+        border: 1px solid var(--gbd);
+        backdrop-filter: var(--blur);
+        border-radius: var(--rl);
+        padding: 2.8rem;
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .pledge-counter {
+        background: rgba(26, 157, 224, 0.1);
+        border: 1px solid rgba(26, 157, 224, 0.25);
+        border-radius: var(--r);
+        padding: 1.2rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+      .pc-number {
+        font-family: "Playfair Display", serif;
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: var(--b3);
+        line-height: 1;
+        min-width: 4ch;
+        display: inline-block;
+        transition: opacity 0.25s;
+      }
+      .pc-label {
+        font-size: 0.78rem;
+        color: var(--b2);
+        line-height: 1.5;
+        text-align: left;
+      }
+      .pc-live {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.63rem;
+        font-weight: 600;
+        color: var(--teal);
+        background: rgba(61, 214, 163, 0.12);
+        border: 1px solid rgba(61, 214, 163, 0.22);
+        padding: 0.15rem 0.5rem;
+        border-radius: 100px;
+        margin-left: 0.3rem;
+      }
+      .pc-live::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--teal);
+        animation: blink 1.8s infinite;
+        flex-shrink: 0;
+      }
+      /* Tabs */
+      .pledge-tabs {
+        display: flex;
+        gap: 0.4rem;
+        margin-bottom: 1.8rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 100px;
+        padding: 0.28rem;
+      }
+      .ptab {
+        flex: 1;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--b2);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 500;
+        padding: 0.52rem 0.6rem;
+        border-radius: 100px;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .ptab.active {
+        background: linear-gradient(135deg, var(--b4), var(--b5));
+        color: #fff;
+        font-weight: 600;
+      }
+      .ptab-panel {
+        display: none;
+      }
+      .ptab-panel.active {
+        display: block;
+      }
+      /* Feed */
+      .sug-feed {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        max-height: 260px;
+        overflow-y: auto;
+        margin-bottom: 1rem;
+        padding-right: 4px;
+      }
+      .sug-feed::-webkit-scrollbar {
+        width: 3px;
+      }
+      .sug-feed::-webkit-scrollbar-thumb {
+        background: var(--gbd);
+        border-radius: 2px;
+      }
+      .sug-item {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 11px;
+        padding: 0.8rem 1rem;
+        text-align: left;
+      }
+      .sug-item-name {
+        font-size: 0.68rem;
+        color: var(--b3);
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+      }
+      .sug-item-text {
+        font-size: 0.82rem;
+        color: var(--b2);
+        line-height: 1.55;
+      }
+      .sug-empty {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.28);
+        padding: 1.5rem 0;
+        text-align: center;
+      }
+      /* Pledge form */
+      .pledge-quote {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        line-height: 1.78;
+        color: var(--b2);
+        margin-bottom: 1.8rem;
+        font-style: italic;
+        border-left: 3px solid var(--b4);
+        text-align: left;
+        padding-left: 1.1rem;
+      }
+      .pledge-quote strong {
+        color: #fff;
+        font-style: normal;
+      }
+      .pform {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .prow {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+      .pinput {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid var(--gbd);
+        border-radius: 11px;
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .pinput::placeholder {
+        color: rgba(255, 255, 255, 0.28);
+      }
+      .pinput:focus {
+        border-color: var(--b4);
+      }
+      textarea.pinput {
+        resize: vertical;
+        min-height: 80px;
+      }
+      .psub {
+        background: linear-gradient(135deg, var(--b4), var(--b5));
+        color: #fff;
+        border: none;
+        padding: 0.85rem 2rem;
+        border-radius: 100px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        box-shadow: 0 4px 22px #1a9de038;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        width: 100%;
+      }
+      .psub:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px #1a9de058;
+      }
+      .psub:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .psuccess {
+        display: none;
+        background: rgba(61, 214, 163, 0.1);
+        border: 1px solid rgba(61, 214, 163, 0.22);
+        border-radius: 11px;
+        padding: 0.95rem;
+        color: var(--teal);
+        font-size: 0.855rem;
+        margin-top: 0.4rem;
+        line-height: 1.6;
+      }
+      .perr {
+        display: none;
+        background: rgba(255, 112, 96, 0.1);
+        border: 1px solid rgba(255, 112, 96, 0.22);
+        border-radius: 11px;
+        padding: 0.75rem;
+        color: var(--coral);
+        font-size: 0.82rem;
+        margin-top: 0.4rem;
+      }
+      .share-row {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1.8rem;
+      }
+      .share-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.55rem 1.1rem;
+        border-radius: 100px;
+        font-size: 0.76rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        font-family: "DM Sans", sans-serif;
+        transition:
+          transform 0.18s,
+          opacity 0.18s;
+      }
+      .share-btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.85;
+      }
+      .sh-wa {
+        background: #25d366;
+        color: #fff;
+      }
+      .sh-tw {
+        background: #1da1f2;
+        color: #fff;
+      }
+      .sh-cp {
+        background: var(--gb);
+        color: var(--b2);
+        border: 1px solid var(--gbd);
+      }
+      /* DB badge */
+      .db-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.6rem;
+        padding: 0.12rem 0.45rem;
+        border-radius: 100px;
+        vertical-align: middle;
+        margin-left: 0.35rem;
+      }
+      .db-ok {
+        background: rgba(61, 214, 163, 0.12);
+        color: var(--teal);
+        border: 1px solid rgba(61, 214, 163, 0.2);
+      }
+      .db-err {
+        background: rgba(255, 209, 102, 0.1);
+        color: var(--warn);
+        border: 1px solid rgba(255, 209, 102, 0.18);
+      }
+      .db-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+      /* CONTACT */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+      .cform {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .cinput {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid var(--gbd);
+        border-radius: 11px;
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .cinput::placeholder {
+        color: rgba(255, 255, 255, 0.28);
+      }
+      .cinput:focus {
+        border-color: var(--b4);
+      }
+      textarea.cinput {
+        resize: vertical;
+        min-height: 95px;
+      }
+      .cinfo {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .ccard {
+        background: var(--gb);
+        border: 1px solid var(--gbd);
+        border-radius: 13px;
+        padding: 1.1rem;
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+      }
+      .ccard-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        margin-top: 0.05rem;
+      }
+      .ccard-tag {
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--b3);
+        margin-bottom: 0.13rem;
+        font-weight: 600;
+      }
+      .ccard-val {
+        font-size: 0.81rem;
+        color: var(--b1);
+        line-height: 1.55;
+      }
+      .csuccess {
+        display: none;
+        background: rgba(61, 214, 163, 0.1);
+        border: 1px solid rgba(61, 214, 163, 0.22);
+        border-radius: 11px;
+        padding: 0.95rem;
+        color: var(--teal);
+        font-size: 0.855rem;
+        margin-top: 0.4rem;
+      }
+      .cerr {
+        display: none;
+        background: rgba(255, 112, 96, 0.1);
+        border: 1px solid rgba(255, 112, 96, 0.22);
+        border-radius: 11px;
+        padding: 0.75rem;
+        color: var(--coral);
+        font-size: 0.82rem;
+        margin-top: 0.4rem;
+      }
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--gbd);
+        padding: 2.2rem 2rem;
+        text-align: center;
+      }
+      .foot-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.35rem;
+      }
+      .foot-name span {
+        color: var(--b3);
+      }
+      .foot-sub {
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.28);
+        line-height: 1.85;
+      }
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        nav {
+          padding: 0 1.1rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .nav-menu {
+          display: block;
+        }
+        .crisis-grid,
+        .myth-grid,
+        .map-layout,
+        .calc-wrap,
+        .contact-grid,
+        .cit-stats-row,
+        .cit-activities,
+        .tl-grid {
+          grid-template-columns: 1fr;
+        }
+        .wide {
+          grid-column: span 1;
+          grid-template-columns: 1fr;
+        }
+        .hero-kpi {
+          grid-template-columns: 1fr;
+        }
+        .tips-grid,
+        .stories-grid {
+          grid-template-columns: 1fr;
+        }
+        .prow {
+          grid-template-columns: 1fr;
+        }
+        .pledge-tabs {
+          flex-direction: column;
+          border-radius: 14px;
+        }
+        .ptab {
+          border-radius: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══ SUPABASE CONFIG — EDIT THESE TWO LINES ══
+     Get values from: Supabase Dashboard → Settings → API   -->
+    <script>
+      const SUPABASE_URL = "https://qxqwzbsidgvtulzmvnmf.supabase.co";
+      const SUPABASE_ANON =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4cXd6YnNpZGd2dHVsem12bm1mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2OTY3NzYsImV4cCI6MjA5NjI3Mjc3Nn0.Qe2P_iYZ4QFAyW2B_MLQ02LdDROOMgNouMvVdZLAIyo";
+      const SB_READY = true;
+
+      async function sbInsert(table, data) {
+        const r = await fetch(SUPABASE_URL + "/rest/v1/" + table, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: SUPABASE_ANON,
+            Authorization: "Bearer " + SUPABASE_ANON,
+            Prefer: "return=representation",
+          },
+          body: JSON.stringify(data),
+        });
+        if (!r.ok) throw new Error(await r.text());
+        return r.json();
+      }
+      async function sbCount(table) {
+        const r = await fetch(
+          SUPABASE_URL + "/rest/v1/" + table + "?select=id",
+          {
+            headers: {
+              apikey: SUPABASE_ANON,
+              Authorization: "Bearer " + SUPABASE_ANON,
+              Prefer: "count=exact",
+              Range: "0-0",
+            },
+          },
+        );
+        const cr = r.headers.get("content-range");
+        return cr && cr.includes("/") ? parseInt(cr.split("/")[1], 10) : null;
+      }
+      async function sbSelect(table, limit = 20) {
+        const r = await fetch(
+          SUPABASE_URL +
+            "/rest/v1/" +
+            table +
+            "?select=*&order=created_at.desc&limit=" +
+            limit,
+          {
+            headers: {
+              apikey: SUPABASE_ANON,
+              Authorization: "Bearer " + SUPABASE_ANON,
+            },
+          },
+        );
+        return r.ok ? r.json() : [];
+      }
+    </script>
+
+    <div class="bg-wrap">
+      <div class="bg-noise"></div>
+      <div class="bg-grad"></div>
+      <div class="bg-orb bg-orb-1"></div>
+      <div class="bg-orb bg-orb-2"></div>
+      <div class="bg-orb bg-orb-3"></div>
+      <svg
+        class="bg-wave"
+        viewBox="0 0 1440 160"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
+        <path
+          fill="#1a9de0"
+          d="M0,110C360,160,720,55,1080,100C1260,124,1380,88,1440,72L1440,160L0,160Z"
+        />
+        <path
+          fill="#66c8ff"
+          d="M0,130C300,98,600,150,900,118C1100,98,1300,135,1440,116L1440,160L0,160Z"
+          opacity=".4"
+        />
+      </svg>
+    </div>
+    <div class="spbar"><div class="spfill" id="spf"></div></div>
+    <div class="wrap">
+      <nav>
+        <a class="nav-brand" href="#">
+          <div class="nav-dot">💧</div>
+          <div class="nav-name">Every<span>Drop</span></div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#crisis">Crisis</a></li>
+          <li><a href="#future">If We Don't Act</a></li>
+          <li><a href="#myths">Myths</a></li>
+          <li><a href="#lakes">Lakes</a></li>
+          <li><a href="#calculator">Calculator</a></li>
+          <li><a href="#cit">Our Unit</a></li>
+          <li><a href="#pledge" class="nav-cta">Pledge</a></li>
+        </ul>
+        <button class="nav-menu" onclick="toggleMenu(this)" aria-label="Menu">
+          ☰
+        </button>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-badge">
+          National Service Scheme (NSS) · Cambridge Institute of Technology ·
+          Bangalore · 2026
+        </div>
+        <h1>Every <em>Drop</em><br />Counts.</h1>
+        <p class="hero-sub">
+          Bangalore was built on 1,452 lakes. Today, fewer than 194 survive.
+          Nearly half the city's borewells have gone dry. We are the generation
+          that decides what comes next.
+        </p>
+        <div class="hero-btns">
+          <a href="#pledge" class="btn-p">Take the Pledge</a>
+          <a href="#crisis" class="btn-o">See the Crisis →</a>
+        </div>
+        <div class="hero-kpi">
+          <div class="kpi">
+            <span class="kpi-n">1,452 → 194</span>
+            <div class="kpi-l">
+              Lakes remaining from the 1960s. Only a handful are ecologically
+              healthy. <em>(IISc)</em>
+            </div>
+          </div>
+          <div class="kpi">
+            <span class="kpi-n">~7,000</span>
+            <div class="kpi-l">
+              Of 14,781 BWSSB borewells have gone completely dry as of 2024
+            </div>
+          </div>
+          <div class="kpi">
+            <span class="kpi-n">500 MLD</span>
+            <div class="kpi-l">
+              Daily water deficit — demand is 2,632 MLD, supply falls far short
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="crisis">
+        <div class="inner">
+          <div class="tag reveal">The Bangalore Water Crisis</div>
+          <h2 class="h2 reveal">A City on the Brink</h2>
+          <p class="sub reveal">
+            Bangalore — India's Silicon Valley — is facing a water emergency
+            decades in the making. Every number below is sourced from BWSSB,
+            IISc, or peer-reviewed research.
+          </p>
+          <div class="crisis-grid reveal">
+            <div class="gc gc-hover scard">
+              <span class="scard-icon">🏞️</span>
+              <div class="scard-tag">Historic lakes remaining</div>
+              <div class="scard-num">~194</div>
+              <div class="scard-desc">
+                IISc records show Bangalore had 1,452 lakes in the 1960s. Today
+                ~194 remain — of these, 90% are sewage-fed and 98% face
+                encroachment. 837 lakes in Bengaluru Urban district alone have
+                vanished.
+              </div>
+              <span class="scard-src"
+                >Source: IISc; House Committee 2021; ALMA Magazine 2025</span
+              >
+            </div>
+            <div class="gc gc-hover scard">
+              <span class="scard-icon">🕳️</span>
+              <div class="scard-tag">Borewells gone dry (2024)</div>
+              <div class="scard-num">6,997</div>
+              <div class="scard-desc">
+                Deputy CM DK Shivakumar revealed in 2024 that nearly half of
+                14,781 BWSSB borewells stopped yielding water. In Whitefield, KR
+                Puram and JP Nagar, borewells now go to 1,500 feet — unthinkable
+                a decade ago.
+              </div>
+              <span class="scard-src"
+                >Source: Deccan Herald; neerain.com 2024–26</span
+              >
+            </div>
+            <div class="gc gc-hover scard wide">
+              <div>
+                <div class="scard-tag">Daily freshwater demand</div>
+                <div class="scard-num">
+                  2,632 <span class="scard-unit">MLD</span>
+                </div>
+                <div class="scard-desc">
+                  WELL Labs estimates total demand at 2,632 million litres/day.
+                  BWSSB supplies only 1,460 MLD — leaving a 500+ MLD daily
+                  deficit filled by rapidly depleting groundwater. 30% of
+                  Cauvery water is additionally lost to leaks.
+                </div>
+                <span class="scard-src"
+                  >Source: WELL Labs / IndiaSpend 2024; IWA Publishing
+                  2025</span
+                >
+              </div>
+              <div>
+                <div class="scard-tag">
+                  Groundwater drop (outskirts, 2024–25)
+                </div>
+                <div class="scard-num">
+                  25 <span class="scard-unit">metres</span>
+                </div>
+                <div class="scard-desc">
+                  BWSSB–IISc study: 110 villages beyond Outer Ring Road face
+                  20–25m drops. Bengaluru South taluk fell ~15m in just 4 months
+                  (Dec 2023–Apr 2024). All 6 urban assessment units are
+                  classified "over-exploited" by CGWB.
+                </div>
+                <span class="scard-src"
+                  >Source: BWSSB–IISc study; Deccan Herald 2025</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="bar-wrap reveal">
+            <div class="scard-tag" style="margin-bottom: 0.25rem">
+              Groundwater table drop by zone — BWSSB–IISc Data (2024–25)
+            </div>
+            <p
+              style="
+                font-size: 0.7rem;
+                color: rgba(255, 255, 255, 0.3);
+                margin-bottom: 1.1rem;
+              "
+            >
+              Approximate annual drop in water table. All zones classified
+              "over-exploited" by CGWB.
+            </p>
+            <div class="bar-row">
+              <div class="bar-lbl">
+                <span>Bengaluru South taluk</span
+                ><span style="color: var(--coral)">~15 m</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: 100%"></div>
+              </div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-lbl">
+                <span>Peripheral CMC zones &amp; 110 ORR villages</span
+                ><span style="color: var(--coral)">10–15 m</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: 83%"></div>
+              </div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-lbl">
+                <span>Bengaluru North / East / Yelahanka</span
+                ><span style="color: var(--warn)">~6 m</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: 50%"></div>
+              </div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-lbl">
+                <span>Central Bengaluru (core BWSSB piped zone)</span
+                ><span style="color: var(--b3)">~5 m</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width: 40%"></div>
+              </div>
+            </div>
+            <div class="bar-note">
+              Source: BWSSB–IISc Collaborative Study, 2025 | Deccan Herald, Feb
+              2025
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="future">
+        <div class="inner">
+          <div class="tag reveal">If We Do Nothing</div>
+          <h2 class="h2 reveal">A Timeline of Consequences</h2>
+          <p class="sub reveal">
+            What researchers, BWSSB, and IISc project if current trends continue
+            unchecked. These are trajectories already in motion.
+          </p>
+          <div class="tl-grid reveal">
+            <div class="timeline">
+              <div class="gc gc-hover tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">2026</div>
+                <div class="tl-title">80+ wards in regular water stress</div>
+                <div class="tl-desc">
+                  BWSSB–IISc study identified 80 wards — primarily KR Puram,
+                  Mahadevapura — facing worsening groundwater declines every
+                  pre-monsoon. Tanker prices have already surged: ₹2,850+ per
+                  12,000L in borewell-dependent areas.
+                </div>
+                <span class="tl-badge bad">Happening now</span>
+              </div>
+              <div class="gc gc-hover tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">2028</div>
+                <div class="tl-title">
+                  Demand surpasses all available supply
+                </div>
+                <div class="tl-desc">
+                  BWSSB planned for 2,900 MLD demand by 2031 — but current
+                  growth may bring that figure forward to 2028. Cauvery
+                  allocation is fixed at maximum 2,200 MLD. The remaining 1,500+
+                  MLD gap has no identified source.
+                </div>
+                <span class="tl-badge worse">High risk</span>
+              </div>
+              <div class="gc gc-hover tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">2030</div>
+                <div class="tl-title">
+                  City-wide water rationing becomes likely
+                </div>
+                <div class="tl-desc">
+                  Projected demand could reach 4,200–4,500 MLD before 2031. A
+                  single failed monsoon could trigger a city-wide crisis — BBC
+                  already ranked Bangalore 2nd globally among cities most likely
+                  to run out of drinking water.
+                </div>
+                <span class="tl-badge critical">Critical scenario</span>
+              </div>
+            </div>
+            <div class="timeline">
+              <div class="gc gc-hover tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">2030s</div>
+                <div class="tl-title">
+                  Temperatures rise 1.7–2.2°C above baseline
+                </div>
+                <div class="tl-desc">
+                  Karnataka State Action Plan on Climate Change projects a
+                  1.7–2.2°C temperature rise. With only ~3% green cover
+                  remaining (down from 68% in the 1970s), the urban heat island
+                  effect will dramatically increase water demand further.
+                </div>
+                <span class="tl-badge worse">Climate-locked</span>
+              </div>
+              <div class="gc gc-hover tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">2050</div>
+                <div class="tl-title">
+                  Drought incidence rises 10%, monsoons intensify
+                </div>
+                <div class="tl-desc">
+                  UNESCO projects drought incidence rising by up to 10% by 2050
+                  for the Bengaluru region. Rainfall will concentrate in
+                  shorter, heavier monsoon bursts — but without lakes and
+                  groundwater to store it, most will run off into drains.
+                </div>
+                <span class="tl-badge critical">Long-term crisis</span>
+              </div>
+              <div class="tl-cta">
+                <div style="font-size: 1.4rem; margin-bottom: 0.45rem">🔄</div>
+                <div
+                  style="
+                    font-weight: 600;
+                    color: #fff;
+                    margin-bottom: 0.38rem;
+                    font-size: 0.95rem;
+                  "
+                >
+                  But it doesn't have to be this way.
+                </div>
+                <div
+                  style="
+                    font-size: 0.83rem;
+                    color: var(--b2);
+                    line-height: 1.68;
+                  "
+                >
+                  With aggressive RWH adoption, lake restoration, leak
+                  reduction, and community action, Bangalore can reverse these
+                  trends. Every lake saved, every pledge signed, every litre
+                  conserved matters.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="myths">
+        <div class="inner">
+          <div class="tag reveal">Busting the Myths</div>
+          <h2 class="h2 reveal">What People Get Wrong</h2>
+          <p class="sub reveal">
+            Misinformation delays action. Here are the most common myths about
+            Bangalore's water crisis — and what the evidence actually shows.
+          </p>
+          <div class="myth-grid reveal">
+            <div class="gc gc-hover myth-card">
+              <div class="myth-label">Myth 01</div>
+              <div class="myth-q">
+                "Bangalore gets enough rain — we don't need to worry."
+              </div>
+              <div class="myth-a-label">Reality</div>
+              <div class="myth-a">
+                Bangalore receives ~970mm of rain annually, but 93% flows off
+                concretised surfaces into drains and out of the city. Without
+                lakes and aquifers to store it, rain doesn't help. Harvesting
+                just 10% of rainfall in the BMR could nearly double supply — but
+                we're not capturing it.
+              </div>
+            </div>
+            <div class="gc gc-hover myth-card">
+              <div class="myth-label">Myth 02</div>
+              <div class="myth-q">
+                "BWSSB and the government will fix this — it's not my problem."
+              </div>
+              <div class="myth-a-label">Reality</div>
+              <div class="myth-a">
+                BWSSB openly acknowledges it cannot meet current demand and has
+                no new planned supply sources. The board deployed 1,700+ tankers
+                in 2024 and still couldn't keep pace. Every household that
+                conserves water, harvests rain, or fixes leaks directly reduces
+                pressure on a system already at breaking point.
+              </div>
+            </div>
+            <div class="gc gc-hover myth-card">
+              <div class="myth-label">Myth 03</div>
+              <div class="myth-q">
+                "Lakes are a thing of the past — the city has moved on."
+              </div>
+              <div class="myth-a-label">Reality</div>
+              <div class="myth-a">
+                Lakes recharge groundwater, regulate temperature, and prevent
+                flooding. The revival of Kaikondrahalli, Jakkur, and
+                Puttenahalli lakes proved restoration is entirely possible and
+                delivers measurable groundwater benefits within years.
+              </div>
+            </div>
+            <div class="gc gc-hover myth-card">
+              <div class="myth-label">Myth 04</div>
+              <div class="myth-q">
+                "My water usage is too small to make a difference."
+              </div>
+              <div class="myth-a-label">Reality</div>
+              <div class="myth-a">
+                Bangalore has ~13 million residents. If each person saved just
+                20 litres/day — a single shorter shower — that's 260 million
+                litres saved daily. More than 17% of the entire daily deficit,
+                solved by one habit change by every resident.
+              </div>
+            </div>
+            <div class="gc gc-hover myth-card">
+              <div class="myth-label">Myth 05</div>
+              <div class="myth-q">
+                "Borewells are unlimited — we just need to drill deeper."
+              </div>
+              <div class="myth-a-label">Reality</div>
+              <div class="myth-a">
+                Borewells at 1,500 feet are tapping fossil water — ancient
+                reserves that took thousands of years to accumulate and cannot
+                be replenished within human timescales. Deeper drilling is not a
+                solution; it accelerates the collapse.
+              </div>
+            </div>
+            <div class="gc gc-hover myth-card">
+              <div class="myth-label">Myth 06</div>
+              <div class="myth-q">
+                "This only affects poorer or outer-ring areas."
+              </div>
+              <div class="myth-a-label">Reality</div>
+              <div class="myth-a">
+                During the 2024 crisis, even Bangalore's wealthiest residents
+                showered at offices and gyms. Central areas with piped water
+                faced restrictions; IT corridors scrambled for tankers. When the
+                aquifer collapses, it collapses for everyone.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="lakes">
+        <div class="inner">
+          <div class="tag reveal">Lakes of Bangalore</div>
+          <h2 class="h2 reveal">Where the Water Bodies Stand</h2>
+          <p class="sub reveal">
+            Bangalore's key lakes — from success stories of restoration to water
+            bodies still in crisis. Click any lake to learn more.
+          </p>
+          <div class="map-layout reveal">
+            <div class="map-svg-wrap">
+              <div class="map-legend">
+                <div class="leg-item">
+                  <div class="leg-dot" style="background: var(--teal)"></div>
+                  Restored / healthy
+                </div>
+                <div class="leg-item">
+                  <div class="leg-dot" style="background: var(--warn)"></div>
+                  Partially degraded
+                </div>
+                <div class="leg-item">
+                  <div class="leg-dot" style="background: var(--coral)"></div>
+                  Severely polluted
+                </div>
+              </div>
+              <svg
+                viewBox="0 0 520 480"
+                xmlns="http://www.w3.org/2000/svg"
+                style="width: 100%; display: block"
+              >
+                <defs>
+                  <radialGradient id="mbg" cx="50%" cy="50%">
+                    <stop offset="0%" stop-color="#0a2840" />
+                    <stop offset="100%" stop-color="#04121e" />
+                  </radialGradient>
+                </defs>
+                <rect width="520" height="480" rx="12" fill="url(#mbg)" />
+                <line
+                  x1="0"
+                  y1="120"
+                  x2="520"
+                  y2="120"
+                  stroke="rgba(255,255,255,.035)"
+                  stroke-width="1"
+                />
+                <line
+                  x1="0"
+                  y1="240"
+                  x2="520"
+                  y2="240"
+                  stroke="rgba(255,255,255,.035)"
+                  stroke-width="1"
+                />
+                <line
+                  x1="0"
+                  y1="360"
+                  x2="520"
+                  y2="360"
+                  stroke="rgba(255,255,255,.035)"
+                  stroke-width="1"
+                />
+                <line
+                  x1="130"
+                  y1="0"
+                  x2="130"
+                  y2="480"
+                  stroke="rgba(255,255,255,.035)"
+                  stroke-width="1"
+                />
+                <line
+                  x1="260"
+                  y1="0"
+                  x2="260"
+                  y2="480"
+                  stroke="rgba(255,255,255,.035)"
+                  stroke-width="1"
+                />
+                <line
+                  x1="390"
+                  y1="0"
+                  x2="390"
+                  y2="480"
+                  stroke="rgba(255,255,255,.035)"
+                  stroke-width="1"
+                />
+                <path
+                  d="M260,0 L260,480"
+                  stroke="rgba(26,157,224,.08)"
+                  stroke-width="7"
+                  stroke-dasharray="18,7"
+                />
+                <path
+                  d="M0,240 L520,240"
+                  stroke="rgba(26,157,224,.08)"
+                  stroke-width="7"
+                  stroke-dasharray="18,7"
+                />
+                <ellipse
+                  cx="260"
+                  cy="240"
+                  rx="158"
+                  ry="138"
+                  fill="none"
+                  stroke="rgba(102,200,255,.1)"
+                  stroke-width="5"
+                  stroke-dasharray="14,5"
+                />
+                <text
+                  x="418"
+                  y="108"
+                  fill="rgba(102,200,255,.35)"
+                  font-size="9.5"
+                  font-family="DM Sans,sans-serif"
+                >
+                  Outer Ring Road
+                </text>
+                <text
+                  x="260"
+                  y="246"
+                  fill="rgba(255,255,255,.14)"
+                  font-size="10.5"
+                  font-family="DM Sans,sans-serif"
+                  text-anchor="middle"
+                >
+                  City Centre
+                </text>
+                <text
+                  x="492"
+                  y="26"
+                  fill="rgba(255,255,255,.3)"
+                  font-size="11"
+                  font-family="DM Sans,sans-serif"
+                  text-anchor="middle"
+                >
+                  N ↑
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="320"
+                  cy="85"
+                  r="13"
+                  fill="#3dd6a322"
+                  stroke="#3dd6a3"
+                  stroke-width="1.5"
+                  onclick="showLake('jakkur')"
+                />
+                <circle cx="320" cy="85" r="5" fill="#3dd6a3" />
+                <text
+                  x="336"
+                  y="89"
+                  fill="#3dd6a3"
+                  font-size="9.5"
+                  font-family="DM Sans,sans-serif"
+                >
+                  Jakkur
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="240"
+                  cy="108"
+                  r="11"
+                  fill="#ffd16622"
+                  stroke="#ffd166"
+                  stroke-width="1.5"
+                  onclick="showLake('hebbal')"
+                />
+                <circle cx="240" cy="108" r="4.5" fill="#ffd166" />
+                <text
+                  x="254"
+                  y="112"
+                  fill="#ffd166"
+                  font-size="9.5"
+                  font-family="DM Sans,sans-serif"
+                >
+                  Hebbal
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="295"
+                  cy="210"
+                  r="11"
+                  fill="#ffd16622"
+                  stroke="#ffd166"
+                  stroke-width="1.5"
+                  onclick="showLake('ulsoor')"
+                />
+                <circle cx="295" cy="210" r="4.5" fill="#ffd166" />
+                <text
+                  x="309"
+                  y="214"
+                  fill="#ffd166"
+                  font-size="9.5"
+                  font-family="DM Sans,sans-serif"
+                >
+                  Ulsoor
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="170"
+                  cy="154"
+                  r="12"
+                  fill="#3dd6a322"
+                  stroke="#3dd6a3"
+                  stroke-width="1.5"
+                  onclick="showLake('sankey')"
+                />
+                <circle cx="170" cy="154" r="4.5" fill="#3dd6a3" />
+                <text
+                  x="127"
+                  y="150"
+                  fill="#3dd6a3"
+                  font-size="9.5"
+                  font-family="DM Sans,sans-serif"
+                  text-anchor="end"
+                >
+                  Sankey
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="368"
+                  cy="308"
+                  r="12"
+                  fill="#3dd6a322"
+                  stroke="#3dd6a3"
+                  stroke-width="1.5"
+                  onclick="showLake('kaikondra')"
+                />
+                <circle cx="368" cy="308" r="4.5" fill="#3dd6a3" />
+                <text
+                  x="383"
+                  y="312"
+                  fill="#3dd6a3"
+                  font-size="9.5"
+                  font-family="DM Sans,sans-serif"
+                >
+                  Kaikondrahalli
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="398"
+                  cy="350"
+                  r="15"
+                  fill="#ff706022"
+                  stroke="#ff7060"
+                  stroke-width="1.5"
+                  onclick="showLake('bellandur')"
+                />
+                <circle cx="398" cy="350" r="5.5" fill="#ff7060" />
+                <text
+                  x="415"
+                  y="354"
+                  fill="#ff7060"
+                  font-size="9.5"
+                  font-family="DM Sans,sans-serif"
+                >
+                  Bellandur
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="438"
+                  cy="288"
+                  r="14"
+                  fill="#ff706022"
+                  stroke="#ff7060"
+                  stroke-width="1.5"
+                  onclick="showLake('varthur')"
+                />
+                <circle cx="438" cy="288" r="5.5" fill="#ff7060" />
+                <text
+                  x="455"
+                  y="292"
+                  fill="#ff7060"
+                  font-size="9.5"
+                  font-family="DM Sans,sans-serif"
+                >
+                  Varthur
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="263"
+                  cy="378"
+                  r="12"
+                  fill="#ffd16622"
+                  stroke="#ffd166"
+                  stroke-width="1.5"
+                  onclick="showLake('madivala')"
+                />
+                <circle cx="263" cy="378" r="4.5" fill="#ffd166" />
+                <text
+                  x="210"
+                  y="382"
+                  fill="#ffd166"
+                  font-size="9.5"
+                  font-family="DM Sans,sans-serif"
+                  text-anchor="end"
+                >
+                  Madivala
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="184"
+                  cy="348"
+                  r="10"
+                  fill="#3dd6a322"
+                  stroke="#3dd6a3"
+                  stroke-width="1.5"
+                  onclick="showLake('puttenahalli')"
+                />
+                <circle cx="184" cy="348" r="4" fill="#3dd6a3" />
+                <text
+                  x="170"
+                  y="366"
+                  fill="#3dd6a3"
+                  font-size="9"
+                  font-family="DM Sans,sans-serif"
+                  text-anchor="middle"
+                >
+                  Puttenahalli
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="108"
+                  cy="198"
+                  r="9"
+                  fill="#ffd16622"
+                  stroke="#ffd166"
+                  stroke-width="1.5"
+                  onclick="showLake('yele')"
+                />
+                <circle cx="108" cy="198" r="4" fill="#ffd166" />
+                <text
+                  x="93"
+                  y="215"
+                  fill="#ffd166"
+                  font-size="8.5"
+                  font-family="DM Sans,sans-serif"
+                  text-anchor="middle"
+                >
+                  Yele M.C.
+                </text>
+                <circle
+                  class="lake-dot"
+                  cx="153"
+                  cy="44"
+                  r="10"
+                  fill="#3dd6a322"
+                  stroke="#3dd6a3"
+                  stroke-width="1.5"
+                  onclick="showLake('hesaraghatta')"
+                />
+                <circle cx="153" cy="44" r="4" fill="#3dd6a3" />
+                <text
+                  x="138"
+                  y="34"
+                  fill="#3dd6a3"
+                  font-size="8.5"
+                  font-family="DM Sans,sans-serif"
+                  text-anchor="middle"
+                >
+                  Hesaraghatta
+                </text>
+                <line
+                  x1="30"
+                  y1="454"
+                  x2="108"
+                  y2="454"
+                  stroke="rgba(255,255,255,.25)"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="69"
+                  y="468"
+                  fill="rgba(255,255,255,.35)"
+                  font-size="8.5"
+                  font-family="DM Sans,sans-serif"
+                  text-anchor="middle"
+                >
+                  ~10 km (schematic)
+                </text>
+              </svg>
+              <p
+                style="
+                  font-size: 0.62rem;
+                  color: rgba(255, 255, 255, 0.22);
+                  margin-top: 0.6rem;
+                "
+              >
+                Schematic map — approximate positions only. Click a lake to
+                learn more.
+              </p>
+            </div>
+            <div class="map-sidebar" id="lake-sidebar">
+              <div class="gc lake-mini healthy" onclick="showLake('jakkur')">
+                <div class="lc-name">Jakkur Lake</div>
+                <div class="lc-status s-healthy">✓ Restored</div>
+                <div class="lc-desc">
+                  North Bangalore. Managed by citizen-BBMP partnership since
+                  2015. Supports 70 fishing families.
+                </div>
+              </div>
+              <div
+                class="gc lake-mini critical"
+                onclick="showLake('bellandur')"
+              >
+                <div class="lc-name">Bellandur Lake</div>
+                <div class="lc-status s-critical">⚠ Severely polluted</div>
+                <div class="lc-desc">
+                  Bangalore's largest lake — has caught fire multiple times from
+                  sewage foam.
+                </div>
+              </div>
+              <div class="gc lake-mini healthy" onclick="showLake('kaikondra')">
+                <div class="lc-name">Kaikondrahalli Lake</div>
+                <div class="lc-status s-healthy">✓ Model restoration</div>
+                <div class="lc-desc">
+                  Once a garbage dump. Restored 2008–2012. National case study.
+                </div>
+              </div>
+              <div class="gc lake-mini degraded" onclick="showLake('hebbal')">
+                <div class="lc-name">Hebbal Lake</div>
+                <div class="lc-status s-degraded">◐ Partially restored</div>
+                <div class="lc-desc">
+                  Some restoration work done but still faces sewage inflow and
+                  encroachment.
+                </div>
+              </div>
+              <div
+                class="gc lake-mini healthy"
+                onclick="showLake('puttenahalli')"
+              >
+                <div class="lc-name">Puttenahalli Lake</div>
+                <div class="lc-status s-healthy">✓ Citizen-restored</div>
+                <div class="lc-desc">
+                  Adopted entirely by Puttenahalli Neighbourhood Trust. Thriving
+                  biodiversity.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="stories">
+        <div class="inner">
+          <div class="tag reveal">Hope in Action</div>
+          <h2 class="h2 reveal">Restoration Success Stories</h2>
+          <p class="sub reveal">
+            Proof that communities can bring Bangalore's lakes back — when
+            citizens, government, and science work together.
+          </p>
+          <div class="stories-grid reveal">
+            <div class="gc gc-hover story-card">
+              <span class="story-icon">🌿</span>
+              <div class="story-badge">✓ Restored</div>
+              <div class="story-title">Kaikondrahalli Lake</div>
+              <div class="story-desc">
+                By 2007, the 48-acre lake on Sarjapur Road was a slushy bed of
+                sewage. In 2008, residents formed the MAPSAS trust, partnered
+                with BBMP, and raised community funds to redesign the
+                restoration around ecology. Water returned by 2012. Today it's a
+                national urban commons case study cited by researchers
+                worldwide.
+              </div>
+              <div class="story-fact">
+                → Inspired restoration efforts at multiple downstream lakes in
+                its cascade chain
+              </div>
+            </div>
+            <div class="gc gc-hover story-card">
+              <span class="story-icon">🐟</span>
+              <div class="story-badge">✓ Restored</div>
+              <div class="story-title">Jakkur Lake</div>
+              <div class="story-desc">
+                Constructed over 200 years ago, Jakkur had become a sewage and
+                garbage dumping site by the 2000s. BBMP took over management
+                with a citizen's group in 2015. A sewage treatment plant now
+                ensures clean inflow. Today, 70 fishing families and 30 cattle
+                owners depend on it.
+              </div>
+              <div class="story-fact">
+                → BBMP calls it "an example of collective action — a node for
+                social and scientific innovation"
+              </div>
+            </div>
+            <div class="gc gc-hover story-card">
+              <span class="story-icon">🦋</span>
+              <div class="story-badge">✓ Citizen-restored</div>
+              <div class="story-title">Puttenahalli Lake</div>
+              <div class="story-desc">
+                South Bangalore's Puttenahalli Lake was rescued entirely by the
+                Puttenahalli Neighbourhood Trust — a resident-led group — with
+                no initial government funding. Native plants, clean water,
+                thriving fish and migratory birds now define this lake.
+              </div>
+              <div class="story-fact">
+                → Demonstrates community adoption as a scalable model across
+                Bangalore's remaining lakes
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="calculator">
+        <div class="inner">
+          <div class="tag reveal">Know Your Usage</div>
+          <h2 class="h2 reveal">Your Water Footprint Calculator</h2>
+          <p class="sub reveal">
+            How much water do you actually use? Adjust the sliders and see how
+            you compare to Bangalore's average of 150 L/day.
+          </p>
+          <div class="calc-wrap reveal">
+            <div class="calc-form">
+              <div class="calc-field">
+                <div class="calc-label">
+                  Shower / bath duration
+                  <span class="calc-val" id="v-shower">10 min</span>
+                </div>
+                <input
+                  class="calc-slider"
+                  type="range"
+                  min="2"
+                  max="30"
+                  value="10"
+                  step="1"
+                  id="s-shower"
+                  oninput="calc()"
+                />
+              </div>
+              <div class="calc-field">
+                <div class="calc-label">
+                  Toilet flushes per day
+                  <span class="calc-val" id="v-flush">6 times</span>
+                </div>
+                <input
+                  class="calc-slider"
+                  type="range"
+                  min="1"
+                  max="15"
+                  value="6"
+                  step="1"
+                  id="s-flush"
+                  oninput="calc()"
+                />
+              </div>
+              <div class="calc-field">
+                <div class="calc-label">
+                  Drinking &amp; cooking water
+                  <span class="calc-val" id="v-drink">4 L</span>
+                </div>
+                <input
+                  class="calc-slider"
+                  type="range"
+                  min="1"
+                  max="10"
+                  value="4"
+                  step="1"
+                  id="s-drink"
+                  oninput="calc()"
+                />
+              </div>
+              <div class="calc-field">
+                <div class="calc-label">
+                  Washing dishes (per day)
+                  <span class="calc-val" id="v-dishes">20 L</span>
+                </div>
+                <input
+                  class="calc-slider"
+                  type="range"
+                  min="5"
+                  max="60"
+                  value="20"
+                  step="5"
+                  id="s-dishes"
+                  oninput="calc()"
+                />
+              </div>
+              <div class="calc-field">
+                <div class="calc-label">
+                  Laundry (loads per week)
+                  <span class="calc-val" id="v-laundry">3 loads</span>
+                </div>
+                <input
+                  class="calc-slider"
+                  type="range"
+                  min="0"
+                  max="14"
+                  value="3"
+                  step="1"
+                  id="s-laundry"
+                  oninput="calc()"
+                />
+              </div>
+              <div class="calc-field">
+                <div class="calc-label">
+                  Gardening / outdoor (per day)
+                  <span class="calc-val" id="v-garden">20 L</span>
+                </div>
+                <input
+                  class="calc-slider"
+                  type="range"
+                  min="0"
+                  max="150"
+                  value="20"
+                  step="5"
+                  id="s-garden"
+                  oninput="calc()"
+                />
+              </div>
+              <div class="calc-field">
+                <div class="calc-label">
+                  Vehicle wash (per week)
+                  <span class="calc-val" id="v-car">1 wash</span>
+                </div>
+                <input
+                  class="calc-slider"
+                  type="range"
+                  min="0"
+                  max="7"
+                  value="1"
+                  step="1"
+                  id="s-car"
+                  oninput="calc()"
+                />
+              </div>
+            </div>
+            <div class="calc-result">
+              <div class="res-main">
+                <div class="res-num" id="total-litres">142</div>
+                <div class="res-unit">litres per day</div>
+                <div class="res-compare" id="compare-txt">
+                  Bangalore average is ~150 L/day. You are close to average.
+                </div>
+              </div>
+              <div class="grade-box g-B" id="grade-box">
+                <div class="grade-lbl">Efficiency grade</div>
+                <div
+                  class="grade-val"
+                  id="grade-val"
+                  style="color: var(--warn)"
+                >
+                  B
+                </div>
+                <div class="grade-desc" id="grade-desc">Room to improve</div>
+              </div>
+              <div class="res-breakdown">
+                <div
+                  style="
+                    font-size: 0.68rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--b3);
+                    margin-bottom: 0.18rem;
+                  "
+                >
+                  Breakdown
+                </div>
+                <div class="rb-row">
+                  <span class="rb-label">🚿 Shower/bath</span
+                  ><span class="rb-val" id="b-shower">120 L</span>
+                </div>
+                <div class="rb-row">
+                  <span class="rb-label">🚽 Toilet flushes</span
+                  ><span class="rb-val" id="b-flush">48 L</span>
+                </div>
+                <div class="rb-row">
+                  <span class="rb-label">🍳 Drinking &amp; cooking</span
+                  ><span class="rb-val" id="b-drink">4 L</span>
+                </div>
+                <div class="rb-row">
+                  <span class="rb-label">🍽 Dishes</span
+                  ><span class="rb-val" id="b-dishes">20 L</span>
+                </div>
+                <div class="rb-row">
+                  <span class="rb-label">👗 Laundry</span
+                  ><span class="rb-val" id="b-laundry">21 L</span>
+                </div>
+                <div class="rb-row">
+                  <span class="rb-label">🌱 Garden/outdoor</span
+                  ><span class="rb-val" id="b-garden">20 L</span>
+                </div>
+                <div class="rb-row">
+                  <span class="rb-label">🚗 Vehicle wash</span
+                  ><span class="rb-val" id="b-car">23 L</span>
+                </div>
+              </div>
+              <div
+                style="
+                  font-size: 0.69rem;
+                  color: rgba(255, 255, 255, 0.25);
+                  text-align: center;
+                  line-height: 1.6;
+                "
+              >
+                BWSSB per capita norm: 150 L/day · India average: 135 L/day ·
+                WHO minimum: 50 L/day
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="tips">
+        <div class="inner">
+          <div class="tag reveal">Save Water</div>
+          <h2 class="h2 reveal">Small Changes, Massive Impact</h2>
+          <p class="sub reveal">
+            If 13 million residents each saved 20L/day, that's 260 million
+            litres — wiping out 17% of the daily deficit. Start here.
+          </p>
+          <div class="tips-grid">
+            <div class="gc gc-hover tip-card reveal d1">
+              <span class="tip-emoji">🚿</span>
+              <div class="tip-title">Shorter Showers</div>
+              <div class="tip-text">
+                A 10-minute shower uses 100–150L. A bucket bath uses 15–20L. Cut
+                shower time to 5 minutes. One of the highest-impact daily habit
+                changes you can make immediately.
+              </div>
+              <span class="tip-save">Saves ~80–130 L/day</span>
+            </div>
+            <div class="gc gc-hover tip-card reveal d2">
+              <span class="tip-emoji">🪣</span>
+              <div class="tip-title">Fix Leaks Immediately</div>
+              <div class="tip-text">
+                A tap dripping once per second wastes 11,000+ litres/year. A
+                leaking toilet can waste up to 200L daily. BWSSB banned use of
+                drinking water for washing vehicles in March 2024 — the crisis
+                is real.
+              </div>
+              <span class="tip-save">Saves up to 200 L/day</span>
+            </div>
+            <div class="gc gc-hover tip-card reveal d3">
+              <span class="tip-emoji">🌧️</span>
+              <div class="tip-title">Harvest Rainwater</div>
+              <div class="tip-text">
+                Bangalore gets ~970mm rain/year. A 100m² roof harvests ~97,000
+                litres annually. BWSSB mandates RWH for buildings above 30×40 sq
+                ft — yet collected ₹2.7 crore in fines for non-compliance in
+                January 2025 alone.
+              </div>
+              <span class="tip-save">Saves lakhs of litres/year</span>
+            </div>
+            <div class="gc gc-hover tip-card reveal d4">
+              <span class="tip-emoji">🌱</span>
+              <div class="tip-title">Water-Wise Gardening</div>
+              <div class="tip-text">
+                Water plants at dawn or dusk. Use drip irrigation (90% efficient
+                vs 60% sprinkler). Choose native Karnataka plants —
+                Bougainvillea, Nerium, Neem — that thrive without extra
+                watering.
+              </div>
+              <span class="tip-save">Saves ~50–80 L/day</span>
+            </div>
+            <div class="gc gc-hover tip-card reveal d5">
+              <span class="tip-emoji">🚗</span>
+              <div class="tip-title">Smarter Vehicle Wash</div>
+              <div class="tip-text">
+                A hosepipe wash uses 150–200L. Two buckets uses 15–20L. That's a
+                10× reduction for one simple swap. BWSSB banned drinking water
+                for vehicle washing during the 2024 crisis.
+              </div>
+              <span class="tip-save">Saves ~170–180 L/wash</span>
+            </div>
+            <div class="gc gc-hover tip-card reveal d6">
+              <span class="tip-emoji">♻️</span>
+              <div class="tip-title">Reuse Greywater</div>
+              <div class="tip-text">
+                Water from rinsing vegetables, rice-washing, or final laundry
+                rinses can water your garden or clean floors. Don't let water
+                that's clean enough for non-potable use disappear down the
+                drain.
+              </div>
+              <span class="tip-save">Saves ~40–60 L/day</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="initiatives">
+        <div class="inner">
+          <div class="tag reveal">NSS in Action</div>
+          <h2 class="h2 reveal">Our Initiatives</h2>
+          <p class="sub reveal">
+            The NSS unit is on the ground in Bangalore — building awareness,
+            supporting infrastructure, and empowering communities to act before
+            it's too late.
+          </p>
+          <div class="init-list">
+            <div class="gc gc-hover init-item reveal">
+              <div class="init-num">01</div>
+              <div>
+                <div class="init-title">
+                  Lake Awareness &amp; Clean-Up Drives
+                </div>
+                <div class="init-desc">
+                  NSS volunteers participate in awareness walks and clean-up
+                  events at Bangalore's surviving lakes — removing waste,
+                  engaging encroachers, and spreading awareness about the
+                  ecological importance of water bodies. We align with BBMP lake
+                  rejuvenation programmes and citizen-led groups.
+                </div>
+                <span class="status-pill s-active">● Active</span>
+              </div>
+            </div>
+            <div class="gc gc-hover init-item reveal">
+              <div class="init-num">02</div>
+              <div>
+                <div class="init-title">
+                  School &amp; College Water Awareness Programme
+                </div>
+                <div class="init-desc">
+                  Interactive water conservation sessions at schools and
+                  colleges — covering Bangalore's crisis, practical actions
+                  students can take, and hands-on water audit activities. Poster
+                  competitions and quizzes help students become advocates at
+                  home.
+                </div>
+                <span class="status-pill s-active">● Active</span>
+              </div>
+            </div>
+            <div class="gc gc-hover init-item reveal">
+              <div class="init-num">03</div>
+              <div>
+                <div class="init-title">
+                  Rainwater Harvesting (RWH) Compliance Campaign
+                </div>
+                <div class="init-desc">
+                  BWSSB mandates RWH for properties above 30×40 sq ft, yet ₹2.7
+                  crore in fines were collected in January 2025 alone for
+                  non-compliance. We help residents understand the mandate, find
+                  compliant installers, and see RWH as an investment, not a
+                  burden.
+                </div>
+                <span class="status-pill s-active">● Active</span>
+              </div>
+            </div>
+            <div class="gc gc-hover init-item reveal">
+              <div class="init-num">04</div>
+              <div>
+                <div class="init-title">
+                  Free Household Water Audit Outreach
+                </div>
+                <div class="init-desc">
+                  Trained NSS volunteers conduct free household water audits —
+                  identifying leaking taps, wasteful appliances, and high-usage
+                  patterns. Simple, actionable reports are shared with families
+                  to help cut consumption and lower water bills.
+                </div>
+                <span class="status-pill s-active">● Active</span>
+              </div>
+            </div>
+            <div class="gc gc-hover init-item reveal">
+              <div class="init-num">05</div>
+              <div>
+                <div class="init-title">
+                  Multilingual Street Outreach Campaign
+                </div>
+                <div class="init-desc">
+                  Street plays, posters, and pamphlets in Kannada, English,
+                  Hindi, and Tamil — reaching all communities with conservation
+                  messaging. Special focus on borewell-dependent areas
+                  identified in the BWSSB–IISc study as highest-risk zones.
+                </div>
+                <span class="status-pill s-up">◎ Upcoming — July 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="cit">
+        <div class="inner">
+          <div class="tag reveal">Our Institution</div>
+          <h2 class="h2 reveal">
+            NSS Unit — Cambridge Institute of Technology
+          </h2>
+          <p class="sub reveal">
+            This campaign is driven by students and volunteers of the NSS unit
+            at CIT Bangalore, committed to community welfare and environmental
+            action.
+          </p>
+          <div class="cit-wrap reveal">
+            <div class="cit-header">
+              <div class="cit-title">Cambridge Institute of Technology</div>
+              <div class="cit-sub">
+                KR Puram, Bengaluru, Karnataka · Affiliated to Visvesvaraya
+                Technological University (VTU)
+              </div>
+            </div>
+            <div class="cit-stats-row">
+              <div class="cit-stat">
+                <span class="cit-stat-n">120+</span>
+                <div class="cit-stat-l">Active NSS volunteers</div>
+              </div>
+              <div class="cit-stat">
+                <span class="cit-stat-n">18</span>
+                <div class="cit-stat-l">Community drives conducted</div>
+              </div>
+              <div class="cit-stat">
+                <span class="cit-stat-n">6,400+</span>
+                <div class="cit-stat-l">People reached through outreach</div>
+              </div>
+              <div class="cit-stat">
+                <span class="cit-stat-n">8</span>
+                <div class="cit-stat-l">
+                  Schools covered in awareness sessions
+                </div>
+              </div>
+            </div>
+            <div class="cit-activities">
+              <div class="cit-act">
+                <div class="cit-act-icon">💧</div>
+                <div>
+                  <div class="cit-act-title">Lake Clean-Up Drives</div>
+                  <div class="cit-act-desc">
+                    Volunteers have participated in clean-up and awareness walks
+                    at Jakkur, Hebbal, and surrounding water bodies —
+                    coordinating with BBMP and local citizen groups.
+                  </div>
+                </div>
+              </div>
+              <div class="cit-act">
+                <div class="cit-act-icon">🏫</div>
+                <div>
+                  <div class="cit-act-title">School Outreach Sessions</div>
+                  <div class="cit-act-desc">
+                    Interactive water conservation sessions conducted at 8
+                    schools in KR Puram and Mahadevapura — areas classified as
+                    highest-risk for groundwater depletion by the BWSSB–IISc
+                    study.
+                  </div>
+                </div>
+              </div>
+              <div class="cit-act">
+                <div class="cit-act-icon">🌧️</div>
+                <div>
+                  <div class="cit-act-title">
+                    RWH Awareness &amp; Compliance Help
+                  </div>
+                  <div class="cit-act-desc">
+                    Door-to-door outreach in residential areas explaining
+                    BWSSB's rainwater harvesting mandate, connecting residents
+                    with compliant installers, and dispelling misconceptions
+                    about cost.
+                  </div>
+                </div>
+              </div>
+              <div class="cit-act">
+                <div class="cit-act-icon">🔍</div>
+                <div>
+                  <div class="cit-act-title">Free Household Water Audits</div>
+                  <div class="cit-act-desc">
+                    Trained NSS volunteers visit homes to identify leaking taps,
+                    wasteful habits, and opportunities to reduce consumption —
+                    with simple reports provided to each family.
+                  </div>
+                </div>
+              </div>
+              <div class="cit-act">
+                <div class="cit-act-icon">🎭</div>
+                <div>
+                  <div class="cit-act-title">Multilingual Street Campaigns</div>
+                  <div class="cit-act-desc">
+                    Street plays and pamphlet distribution in Kannada, English,
+                    Hindi, and Tamil — bringing the water crisis conversation
+                    directly to markets, bus stops, and public spaces.
+                  </div>
+                </div>
+              </div>
+              <div class="cit-act">
+                <div class="cit-act-icon">📊</div>
+                <div>
+                  <div class="cit-act-title">Digital Awareness Campaign</div>
+                  <div class="cit-act-desc">
+                    This website, social media outreach, and digital content
+                    created by CIT students to reach younger Bangaloreans and
+                    build momentum for the water pledge movement.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <!-- PLEDGE with 3 tabs -->
+      <section id="pledge">
+        <div class="inner">
+          <div class="tag reveal" style="text-align: center">Take a Stand</div>
+          <h2 class="h2 reveal" style="text-align: center">
+            Sign the Water Pledge
+          </h2>
+          <p class="sub reveal" style="text-align: center; margin: 0 auto 3rem">
+            Commit to saving water every day. Your pledge joins Bangaloreans
+            choosing to act before it's too late.
+          </p>
+          <div class="pledge-box reveal">
+            <div class="pledge-counter">
+              <div><span class="pc-number" id="pc-num">—</span></div>
+              <div class="pc-label">
+                Bangaloreans have pledged<br /><span class="pc-live">Live</span
+                ><span id="db-badge"></span>
+              </div>
+            </div>
+            <div class="pledge-tabs">
+              <button class="ptab active" onclick="switchTab(event, 'sign')">
+                ✍️ Sign the Pledge
+              </button>
+              <button class="ptab" onclick="switchTab(event, 'suggest')">
+                💡 Suggestions
+              </button>
+              <button class="ptab" onclick="switchTab(event, 'recent')">
+                🙋 Recent Pledges
+              </button>
+            </div>
+            <!-- TAB: SIGN -->
+            <div class="ptab-panel active" id="tab-sign">
+              <div class="pledge-quote">
+                "I pledge to conserve water in my daily life — to fix leaks,
+                reduce waste, support rainwater harvesting, and raise awareness
+                — because I believe that
+                <strong>water is a right, not a commodity</strong>, and
+                Bangalore's future depends on the choices we make today."
+              </div>
+              <div class="pform">
+                <div class="prow">
+                  <input
+                    class="pinput"
+                    id="p-name"
+                    type="text"
+                    placeholder="Your full name"
+                  />
+                  <input
+                    class="pinput"
+                    id="p-area"
+                    type="text"
+                    placeholder="Your area (e.g. Koramangala)"
+                  />
+                </div>
+                <input
+                  class="pinput"
+                  id="p-email"
+                  type="email"
+                  placeholder="Email address (optional)"
+                />
+                <div class="psuccess" id="psuccess">
+                  ✅ Thank you for pledging! You are now part of Bangalore's
+                  water movement. Share this page with three friends — that's
+                  how movements grow.
+                </div>
+                <div class="perr" id="perr"></div>
+                <button class="psub" id="psub-btn" onclick="submitPledge()">
+                  Sign the Pledge →
+                </button>
+              </div>
+            </div>
+            <!-- TAB: SUGGEST -->
+            <div class="ptab-panel" id="tab-suggest">
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--b2);
+                  margin-bottom: 1.2rem;
+                  text-align: left;
+                "
+              >
+                Have an idea to save water, restore a lake, or improve our
+                campaign? Share it — we read every suggestion.
+              </p>
+              <div class="pform">
+                <div class="prow">
+                  <input
+                    class="pinput"
+                    id="sg-name"
+                    type="text"
+                    placeholder="Your name (optional)"
+                  />
+                  <input
+                    class="pinput"
+                    id="sg-area"
+                    type="text"
+                    placeholder="Your area (optional)"
+                  />
+                </div>
+                <textarea
+                  class="pinput"
+                  id="sg-text"
+                  rows="4"
+                  placeholder="Your suggestion or idea..."
+                ></textarea>
+                <div class="psuccess" id="sgsuccess">
+                  ✅ Thank you! Your suggestion has been recorded. We'll review
+                  it with the team.
+                </div>
+                <div class="perr" id="sgerr"></div>
+                <button
+                  class="psub"
+                  id="sgsub-btn"
+                  onclick="submitSuggestion()"
+                >
+                  Submit Suggestion →
+                </button>
+              </div>
+              <div style="margin-top: 1.8rem">
+                <div
+                  style="
+                    font-size: 0.7rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: var(--b3);
+                    margin-bottom: 0.75rem;
+                    text-align: left;
+                  "
+                >
+                  Recent community suggestions
+                </div>
+                <div class="sug-feed" id="sug-feed">
+                  <div class="sug-empty">
+                    Switch to this tab to load suggestions.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- TAB: RECENT PLEDGES -->
+            <div class="ptab-panel" id="tab-recent">
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: var(--b2);
+                  margin-bottom: 1.2rem;
+                  text-align: left;
+                "
+              >
+                People who have pledged to conserve water across Bangalore.
+              </div>
+              <div class="sug-feed" id="pledge-feed">
+                <div class="sug-empty">Switch to this tab to load pledges.</div>
+              </div>
+            </div>
+            <div class="share-row">
+              <button class="share-btn sh-wa" onclick="shareWA()">
+                📱 WhatsApp
+              </button>
+              <button class="share-btn sh-tw" onclick="shareTW()">
+                𝕏 Twitter / X
+              </button>
+              <button class="share-btn sh-cp" onclick="copyLink()">
+                🔗 Copy Link
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="divider"></div>
+
+      <section id="contact">
+        <div class="inner">
+          <div class="tag reveal">Get Involved</div>
+          <h2 class="h2 reveal">Join the Movement</h2>
+          <p class="sub reveal">
+            Volunteer with us, collaborate on a campaign, or bring our awareness
+            programme to your school or apartment complex. Every person who
+            joins amplifies our impact.
+          </p>
+          <div class="contact-grid">
+            <div class="reveal">
+              <div class="cform">
+                <input
+                  class="cinput"
+                  id="c-name"
+                  type="text"
+                  placeholder="Your name"
+                />
+                <input
+                  class="cinput"
+                  id="c-email"
+                  type="email"
+                  placeholder="Email address"
+                />
+                <input
+                  class="cinput"
+                  id="c-help"
+                  type="text"
+                  placeholder="How would you like to help?"
+                />
+                <textarea
+                  class="cinput"
+                  id="c-msg"
+                  placeholder="Tell us about yourself or your idea..."
+                  rows="4"
+                ></textarea>
+                <div class="csuccess" id="csuccess">
+                  ✅ Message received! We'll be in touch within a few days.
+                  Thank you for wanting to help.
+                </div>
+                <div class="cerr" id="cerr"></div>
+                <button
+                  class="psub"
+                  style="width: auto; padding: 0.82rem 2rem"
+                  id="csub-btn"
+                  onclick="submitContact()"
+                >
+                  Send Message →
+                </button>
+              </div>
+            </div>
+            <div class="cinfo reveal">
+              <div class="ccard">
+                <div class="ccard-icon">🎓</div>
+                <div>
+                  <div class="ccard-tag">NSS Unit</div>
+                  <div class="ccard-val">
+                    National Service Scheme (NSS)<br />Cambridge Institute of
+                    Technology<br />KR Puram, Bengaluru, Karnataka
+                  </div>
+                </div>
+              </div>
+              <div class="ccard">
+                <div class="ccard-icon">📣</div>
+                <div>
+                  <div class="ccard-tag">Volunteer for</div>
+                  <div class="ccard-val">
+                    Lake clean-up drives · School sessions · Street campaigns ·
+                    Water audits · Digital outreach · RWH awareness
+                  </div>
+                </div>
+              </div>
+              <div class="ccard">
+                <div class="ccard-icon">⏰</div>
+                <div>
+                  <div class="ccard-tag">Commitment</div>
+                  <div class="ccard-val">
+                    Flexible — even 2 hours a month creates real, measurable
+                    impact. No prior experience needed. Just the will to act.
+                  </div>
+                </div>
+              </div>
+              <div class="ccard">
+                <div class="ccard-icon">🏫</div>
+                <div>
+                  <div class="ccard-tag">Bring us to your school / RWA</div>
+                  <div class="ccard-val">
+                    We conduct free water awareness sessions, audits, and RWH
+                    workshops for schools, colleges, and resident welfare
+                    associations across Bangalore.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="foot-name">Every<span>Drop</span> Counts</div>
+        <div class="foot-sub">
+          A water awareness initiative by NSS · Cambridge Institute of
+          Technology, Bengaluru · 2026<br />
+          Data sourced from IISc, BWSSB, WELL Labs, UNESCO, Deccan Herald,
+          IndiaSpend, and Karnataka State Action Plan on Climate Change.<br />
+          All statistics are cited from publicly available research and news
+          reports.
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Scroll progress
+      window.addEventListener("scroll", () => {
+        const s = document.documentElement,
+          h = s.scrollHeight - s.clientHeight;
+        document.getElementById("spf").style.width =
+          (window.scrollY / h) * 100 + "%";
+      });
+      // Reveal
+      const obs = new IntersectionObserver(
+        (e) => {
+          e.forEach((x) => {
+            if (x.isIntersecting) {
+              x.target.classList.add("in");
+              obs.unobserve(x.target);
+            }
+          });
+        },
+        { threshold: 0.08 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+      // Mobile menu
+      function toggleMenu(btn) {
+        let m = document.getElementById("mobile-nav");
+        if (!m) {
+          m = document.createElement("div");
+          m.id = "mobile-nav";
+          m.style.cssText =
+            "position:fixed;top:67px;left:0;right:0;z-index:99;background:rgba(0,18,31,.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.13);padding:1rem 1.5rem;display:flex;flex-direction:column;gap:.3rem";
+          [
+            "Crisis",
+            "If We Don't Act",
+            "Myths",
+            "Lakes",
+            "Calculator",
+            "Our Unit",
+            "Pledge",
+          ].forEach((lbl, i) => {
+            const ids = [
+              "crisis",
+              "future",
+              "myths",
+              "lakes",
+              "calculator",
+              "cit",
+              "pledge",
+            ];
+            const a = document.createElement("a");
+            a.href = "#" + ids[i];
+            a.textContent = lbl;
+            a.style.cssText =
+              "color:rgba(179,227,255,.9);text-decoration:none;font-size:.88rem;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.06)";
+            a.onclick = () => {
+              m.remove();
+              btn.textContent = "☰";
+            };
+            m.appendChild(a);
+          });
+          document.body.appendChild(m);
+          btn.textContent = "✕";
+        } else {
+          m.remove();
+          btn.textContent = "☰";
+        }
+      }
+      // Tabs
+      function switchTab(e, name) {
+        document
+          .querySelectorAll(".ptab")
+          .forEach((t) => t.classList.remove("active"));
+        document
+          .querySelectorAll(".ptab-panel")
+          .forEach((p) => p.classList.remove("active"));
+        document.getElementById("tab-" + name).classList.add("active");
+        e.currentTarget.classList.add("active");
+        if (name === "suggest") loadSuggestions();
+        if (name === "recent") loadRecentPledges();
+      }
+      // Calculator
+      function calc() {
+        const shower = +document.getElementById("s-shower").value,
+          flush = +document.getElementById("s-flush").value,
+          drink = +document.getElementById("s-drink").value,
+          dishes = +document.getElementById("s-dishes").value,
+          laundry = +document.getElementById("s-laundry").value,
+          garden = +document.getElementById("s-garden").value,
+          car = +document.getElementById("s-car").value;
+        document.getElementById("v-shower").textContent = shower + " min";
+        document.getElementById("v-flush").textContent = flush + " times";
+        document.getElementById("v-drink").textContent = drink + " L";
+        document.getElementById("v-dishes").textContent = dishes + " L";
+        document.getElementById("v-laundry").textContent = laundry + " loads";
+        document.getElementById("v-garden").textContent = garden + " L";
+        document.getElementById("v-car").textContent =
+          car + " wash" + (car !== 1 ? "es" : "");
+        const bs = shower * 12,
+          bf = flush * 8,
+          bd = drink,
+          bdi = dishes,
+          bl = Math.round((laundry * 70) / 7),
+          bg = garden,
+          bc = Math.round((car * 160) / 7);
+        const total = bs + bf + bd + bdi + bl + bg + bc;
+        document.getElementById("b-shower").textContent = bs + " L";
+        document.getElementById("b-flush").textContent = bf + " L";
+        document.getElementById("b-drink").textContent = bd + " L";
+        document.getElementById("b-dishes").textContent = bdi + " L";
+        document.getElementById("b-laundry").textContent = bl + " L";
+        document.getElementById("b-garden").textContent = bg + " L";
+        document.getElementById("b-car").textContent = bc + " L";
+        document.getElementById("total-litres").textContent = total;
+        const avg = 150;
+        let cmp;
+        if (total < 80)
+          cmp =
+            "Far below average — you are an exemplary water saver. (Bangalore avg: 150 L/day)";
+        else if (total < 120)
+          cmp =
+            "Below average — great conservation habits. (Bangalore avg: 150 L/day)";
+        else if (total < 160)
+          cmp =
+            "Close to Bangalore's average of 150 L/day. There's still room to improve.";
+        else if (total < 250)
+          cmp =
+            "Above average. A few habit changes could save " +
+            (total - avg) +
+            " litres daily.";
+        else
+          cmp =
+            "High usage — " +
+            Math.round(((total - avg) / avg) * 100) +
+            "% above average. Consider the tips below.";
+        document.getElementById("compare-txt").textContent = cmp;
+        let grade, gc, gd, gv;
+        if (total < 100) {
+          grade = "A+";
+          gc = "g-A";
+          gd = "Exceptional conservation";
+          gv = "var(--teal)";
+        } else if (total < 130) {
+          grade = "A";
+          gc = "g-A";
+          gd = "Excellent water saver";
+          gv = "var(--teal)";
+        } else if (total < 160) {
+          grade = "B";
+          gc = "g-B";
+          gd = "Room to improve";
+          gv = "var(--warn)";
+        } else if (total < 220) {
+          grade = "C";
+          gc = "g-C";
+          gd = "Significantly above average";
+          gv = "var(--coral)";
+        } else {
+          grade = "D";
+          gc = "g-C";
+          gd = "High — urgent action needed";
+          gv = "var(--coral)";
+        }
+        const gb = document.getElementById("grade-box");
+        gb.className = "grade-box " + gc;
+        document.getElementById("grade-val").textContent = grade;
+        document.getElementById("grade-val").style.color = gv;
+        document.getElementById("grade-desc").textContent = gd;
+      }
+      calc();
+      // Lakes
+      const lakeData = {
+        jakkur: {
+          name: "Jakkur Lake",
+          status: "healthy",
+          lbl: "✓ Restored",
+          desc: "North Bangalore. Constructed 200+ years ago. Became a sewage/garbage dump by the 2000s. BBMP took over with a citizen's group in 2015. A sewage treatment plant ensures clean inflow. Supports 70 fishing families and 30 cattle owners. A model of collective action.",
+        },
+        bellandur: {
+          name: "Bellandur Lake",
+          status: "critical",
+          lbl: "⚠ Severely polluted",
+          desc: "Bangalore's largest lake — has caught fire multiple times from toxic sewage foam. Located in the heart of the IT corridor. A stark symbol of what happens when city growth outpaces environmental governance.",
+        },
+        kaikondra: {
+          name: "Kaikondrahalli Lake",
+          status: "healthy",
+          lbl: "✓ Model restoration",
+          desc: "48 acres on Sarjapur Road. Was a slushy sewage bed by 2007. Community group MAPSAS partnered with BBMP from 2008–2012. Water returned by 2012. A national case study in urban commons restoration.",
+        },
+        hebbal: {
+          name: "Hebbal Lake",
+          status: "degraded",
+          lbl: "◐ Partially restored",
+          desc: "North Bangalore. Some restoration work done but still faces ongoing sewage inflow and encroachment pressure from surrounding high-density development.",
+        },
+        sankey: {
+          name: "Sankey Tank",
+          status: "healthy",
+          lbl: "✓ Maintained",
+          desc: "Northwest Bangalore. Built in 1882 by Colonel Richard Sankey. Relatively well-maintained with walking paths and greenery. Remains ecologically active.",
+        },
+        ulsoor: {
+          name: "Ulsoor Lake",
+          status: "degraded",
+          lbl: "◐ Partially degraded",
+          desc: "Central Bangalore. One of the oldest lakes — built during Hyder Ali's rule. Continues to receive sewage from surrounding areas despite restoration attempts.",
+        },
+        madivala: {
+          name: "Madivala Lake",
+          status: "degraded",
+          lbl: "◐ Partially degraded",
+          desc: "South Bangalore. One of the oldest and largest lakes. Faces ongoing encroachment and sewage inflow challenges despite some conservation efforts.",
+        },
+        varthur: {
+          name: "Varthur Lake",
+          status: "critical",
+          lbl: "⚠ Severely polluted",
+          desc: "East Bangalore — the second largest lake. Receives vast quantities of untreated sewage and industrial effluent. Has experienced foam and fire incidents like Bellandur.",
+        },
+        puttenahalli: {
+          name: "Puttenahalli Lake",
+          status: "healthy",
+          lbl: "✓ Citizen-restored",
+          desc: "South Bangalore. Rescued entirely by the Puttenahalli Neighbourhood Trust with no initial government funding. Native plants, clean water, thriving fish populations and migratory birds.",
+        },
+        yele: {
+          name: "Yele Mallappa Chetty Lake",
+          status: "degraded",
+          lbl: "◐ At risk",
+          desc: "Northwest Bangalore. Part of the historic Bangalore lake cascade system. Faces severe pressure from urban encroachment and sewage inflow.",
+        },
+        hesaraghatta: {
+          name: "Hesaraghatta Lake",
+          status: "healthy",
+          lbl: "✓ Relatively healthy",
+          desc: "~30km north of city centre. One of Bangalore's oldest reservoirs — water first piped from here to the city in 1894. Retains ecological health away from dense urbanisation.",
+        },
+      };
+      function showLake(id) {
+        const d = lakeData[id];
+        const sc =
+          d.status === "healthy"
+            ? "healthy"
+            : d.status === "critical"
+              ? "critical"
+              : "degraded";
+        const sl =
+          d.status === "healthy"
+            ? "s-healthy"
+            : d.status === "critical"
+              ? "s-critical"
+              : "s-degraded";
+        document.getElementById("lake-sidebar").innerHTML =
+          `<div class="gc lake-mini ${sc}" style="border-left-width:4px"><div class="lc-name">${d.name}</div><div class="lc-status ${sl}">${d.lbl}</div><div class="lc-desc" style="font-size:.82rem;margin-top:.5rem">${d.desc}</div></div>` +
+          Object.entries(lakeData)
+            .filter(([k]) => k !== id)
+            .map(([k, v]) => {
+              const s2 =
+                v.status === "healthy"
+                  ? "healthy"
+                  : v.status === "critical"
+                    ? "critical"
+                    : "degraded";
+              const sl2 =
+                v.status === "healthy"
+                  ? "s-healthy"
+                  : v.status === "critical"
+                    ? "s-critical"
+                    : "s-degraded";
+              return `<div class="gc lake-mini ${s2}" onclick="showLake('${k}')"><div class="lc-name">${v.name}</div><div class="lc-status ${sl2}">${v.lbl}</div></div>`;
+            })
+            .join("");
+      }
+      // Helper
+      function esc(s) {
+        const d = document.createElement("div");
+        d.textContent = s;
+        return d.innerHTML;
+      }
+      // Counter init
+      let pledgeCount = 1247;
+      async function initCounter() {
+        if (!SB_READY) {
+          document.getElementById("pc-num").textContent =
+            pledgeCount.toLocaleString("en-IN");
+          document.getElementById("db-badge").innerHTML =
+            '<span class="db-status db-err"><span class="db-dot"></span>Demo mode</span>';
+          return;
+        }
+        try {
+          const count = await sbCount("pledges");
+          if (count !== null) {
+            pledgeCount = count + 1247;
+            document.getElementById("pc-num").textContent =
+              pledgeCount.toLocaleString("en-IN");
+            document.getElementById("db-badge").innerHTML =
+              '<span class="db-status db-ok"><span class="db-dot"></span>Connected</span>';
+          }
+        } catch (e) {
+          document.getElementById("pc-num").textContent =
+            pledgeCount.toLocaleString("en-IN");
+        }
+      }
+      initCounter();
+      function scheduleNext() {
+        const delay = 8000 + Math.random() * 18000;
+        setTimeout(() => {
+          pledgeCount++;
+          const el = document.getElementById("pc-num");
+          el.style.opacity = "0.5";
+          setTimeout(() => {
+            el.textContent = pledgeCount.toLocaleString("en-IN");
+            el.style.opacity = "1";
+          }, 200);
+          scheduleNext();
+        }, delay);
+      }
+      scheduleNext();
+      // Pledge submit
+      async function submitPledge() {
+        const name = document.getElementById("p-name").value.trim(),
+          area = document.getElementById("p-area").value.trim() || "Bangalore",
+          email = document.getElementById("p-email").value.trim();
+        if (!name) {
+          document.getElementById("p-name").focus();
+          return;
+        }
+        const btn = document.getElementById("psub-btn");
+        btn.disabled = true;
+        btn.textContent = "Signing…";
+        document.getElementById("perr").style.display = "none";
+        if (SB_READY) {
+          try {
+            await sbInsert("pledges", { name, area, email: email || null });
+          } catch (e) {
+            document.getElementById("perr").textContent =
+              "Could not save pledge — please try again.";
+            document.getElementById("perr").style.display = "block";
+            btn.disabled = false;
+            btn.textContent = "Sign the Pledge →";
+            return;
+          }
+        }
+        pledgeCount++;
+        const el = document.getElementById("pc-num");
+        el.style.opacity = "0.5";
+        setTimeout(() => {
+          el.textContent = pledgeCount.toLocaleString("en-IN");
+          el.style.opacity = "1";
+        }, 200);
+        document.getElementById("psuccess").style.display = "block";
+        btn.textContent = "Pledged ✓";
+      }
+      // Suggestion submit
+      async function submitSuggestion() {
+        const text = document.getElementById("sg-text").value.trim(),
+          name = document.getElementById("sg-name").value.trim() || "Anonymous",
+          area = document.getElementById("sg-area").value.trim();
+        if (!text) {
+          document.getElementById("sg-text").focus();
+          return;
+        }
+        const btn = document.getElementById("sgsub-btn");
+        btn.disabled = true;
+        btn.textContent = "Sending…";
+        document.getElementById("sgerr").style.display = "none";
+        if (SB_READY) {
+          try {
+            await sbInsert("suggestions", {
+              suggestion: text,
+              name,
+              area: area || null,
+            });
+          } catch (e) {
+            document.getElementById("sgerr").textContent =
+              "Could not save suggestion — please try again.";
+            document.getElementById("sgerr").style.display = "block";
+            btn.disabled = false;
+            btn.textContent = "Submit Suggestion →";
+            return;
+          }
+        } else {
+          await new Promise((r) => setTimeout(r, 500));
+        }
+        document.getElementById("sgsuccess").style.display = "block";
+        btn.textContent = "Sent ✓";
+        document.getElementById("sg-text").value = "";
+        setTimeout(loadSuggestions, 600);
+      }
+      // Contact submit
+      async function submitContact() {
+        const name = document.getElementById("c-name").value.trim(),
+          email = document.getElementById("c-email").value.trim(),
+          help = document.getElementById("c-help").value.trim(),
+          msg = document.getElementById("c-msg").value.trim();
+        if (!name) {
+          document.getElementById("c-name").focus();
+          return;
+        }
+        const btn = document.getElementById("csub-btn");
+        btn.disabled = true;
+        btn.textContent = "Sending…";
+        document.getElementById("cerr").style.display = "none";
+        if (SB_READY) {
+          try {
+            await sbInsert("contact_messages", {
+              name,
+              email: email || null,
+              how_to_help: help || null,
+              message: msg || null,
+            });
+          } catch (e) {
+            document.getElementById("cerr").textContent =
+              "Could not send message — please try again.";
+            document.getElementById("cerr").style.display = "block";
+            btn.disabled = false;
+            btn.textContent = "Send Message →";
+            return;
+          }
+        } else {
+          await new Promise((r) => setTimeout(r, 600));
+        }
+        document.getElementById("csuccess").style.display = "block";
+        btn.textContent = "Message Sent ✓";
+      }
+      // Load suggestions feed
+      async function loadSuggestions() {
+        const feed = document.getElementById("sug-feed");
+        feed.innerHTML = '<div class="sug-empty">Loading…</div>';
+        if (!SB_READY) {
+          feed.innerHTML =
+            '<div class="sug-item"><div class="sug-item-name">Priya · Jayanagar</div><div class="sug-item-text">Could we set up a greywater reuse demo at a model apartment complex? Very convincing for RWA members.</div></div><div class="sug-item"><div class="sug-item-name">Rajan · Whitefield</div><div class="sug-item-text">Please do sessions in apartment communities — they have borewell access and can make real decisions on RWH.</div></div><div class="sug-item"><div class="sug-item-name">Anonymous · KR Puram</div><div class="sug-item-text">Add Kannada subtitles to the street play videos and share on WhatsApp groups for much wider reach.</div></div>';
+          return;
+        }
+        try {
+          const rows = await sbSelect("suggestions", 20);
+          if (!rows.length) {
+            feed.innerHTML =
+              '<div class="sug-empty">No suggestions yet — be the first!</div>';
+            return;
+          }
+          feed.innerHTML = rows
+            .map(
+              (r) =>
+                `<div class="sug-item"><div class="sug-item-name">${esc(r.name || "Anonymous")}${r.area ? " · " + esc(r.area) : ""}</div><div class="sug-item-text">${esc(r.suggestion)}</div></div>`,
+            )
+            .join("");
+        } catch (e) {
+          feed.innerHTML =
+            '<div class="sug-empty">Could not load suggestions.</div>';
+        }
+      }
+      // Load recent pledges feed
+      async function loadRecentPledges() {
+        const feed = document.getElementById("pledge-feed");
+        feed.innerHTML = '<div class="sug-empty">Loading…</div>';
+        if (!SB_READY) {
+          feed.innerHTML =
+            '<div class="sug-item"><div class="sug-item-name">Kavya · Koramangala</div><div class="sug-item-text">Pledged to conserve water.</div></div><div class="sug-item"><div class="sug-item-name">Arjun · Indiranagar</div><div class="sug-item-text">Pledged to conserve water.</div></div><div class="sug-item"><div class="sug-item-name">Sunita · JP Nagar</div><div class="sug-item-text">Pledged to conserve water.</div></div>';
+          return;
+        }
+        try {
+          const rows = await sbSelect("pledges", 20);
+          if (!rows.length) {
+            feed.innerHTML =
+              '<div class="sug-empty">No pledges yet — be the first!</div>';
+            return;
+          }
+          feed.innerHTML = rows
+            .map(
+              (r) =>
+                `<div class="sug-item"><div class="sug-item-name">${esc(r.name)}${r.area ? " · " + esc(r.area) : ""}</div><div class="sug-item-text">Pledged to conserve water.</div></div>`,
+            )
+            .join("");
+        } catch (e) {
+          feed.innerHTML =
+            '<div class="sug-empty">Could not load pledges.</div>';
+        }
+      }
+      // Share
+      const url = window.location.href;
+      const msg =
+        "Bangalore has lost 90% of its lakes. Nearly half its borewells are dry. I just pledged to conserve water with NSS CIT Bangalore. Join me: " +
+        url;
+      function shareWA() {
+        window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+      }
+      function shareTW() {
+        window.open(
+          "https://twitter.com/intent/tweet?text=" +
+            encodeURIComponent(
+              "Bangalore is running out of water. I just signed the NSS water pledge. Join me: " +
+                url,
+            ),
+          "_blank",
+        );
+      }
+      function copyLink() {
+        navigator.clipboard.writeText(url).then(() => {
+          const b = document.querySelectorAll(".sh-cp")[0];
+          b.textContent = "✓ Copied!";
+          setTimeout(() => (b.textContent = "🔗 Copy Link"), 2200);
+        });
+      }
+    </script>
+  </body>
+</html>
