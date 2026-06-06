@@ -3662,7 +3662,7 @@
         return d.innerHTML;
       }
       // Counter init
-      let pledgeCount = 1247;
+      let pledgeCount = 0;
       async function initCounter() {
         if (!SB_READY) {
           document.getElementById("pc-num").textContent =
@@ -3674,7 +3674,7 @@
         try {
           const count = await sbCount("pledges");
           if (count !== null) {
-            pledgeCount = count + 1247;
+            pledgeCount = count + 0;
             document.getElementById("pc-num").textContent =
               pledgeCount.toLocaleString("en-IN");
             document.getElementById("db-badge").innerHTML =
